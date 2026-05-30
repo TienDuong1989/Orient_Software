@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orient — Author Program</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Epilogue:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #161412;
+  --ink2: #201E1B;
+  --ink3: #2A2724;
+  --cream: #F8F5F0;
+  --cream2: #EEE9E1;
+  --cream3: #E4DDD3;
+  --gold: #B07D2A;
+  --gold-lt: #D4A84B;
+  --gold-bg: rgba(176,125,42,0.08);
+  --text: #2C2926;
+  --sub: #6B6460;
+  --muted: #9C958E;
+  --border: #DDD6CC;
+  --green: #2A6048;
+  --green-bg: rgba(42,96,72,0.07);
+  --red: #B02B20;
+  --red-bg: rgba(176,43,32,0.07);
+  --blue: #1E4880;
+  --blue-bg: rgba(30,72,128,0.07);
+  --orange: #B85C2A;
+  --orange-bg: rgba(184,92,42,0.07);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Epilogue', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--ink);
+  height: 54px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.logo { font-family: 'Lora', serif; font-size: 17px; color: #FAF8F4; letter-spacing: .01em; }
+.logo b { color: #E03B2E; font-weight: 400; }
+.logo-sub { font-size: 9px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: rgba(250,248,244,0.28); display: block; margin-top: 2px; }
+.topbar-right { font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: rgba(250,248,244,0.28); }
+
+/* ── NAV ── */
+.nav {
+  background: var(--ink2);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; padding: 0 48px;
+}
+.nav-btn {
+  font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: rgba(250,248,244,0.35); cursor: pointer;
+  padding: 13px 18px; transition: all .15s;
+}
+.nav-btn:hover { color: rgba(250,248,244,0.65); }
+.nav-btn.on { color: var(--gold-lt); border-bottom-color: var(--gold-lt); }
+
+/* ── PAGE ── */
+.page { display: none; }
+.page.on { display: block; }
+.inner { max-width: 900px; margin: 0 auto; padding: 52px 40px 100px; }
+.inner-wide { max-width: 1140px; margin: 0 auto; padding: 52px 40px 100px; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--ink);
+  border-radius: 18px;
+  padding: 50px 56px 46px;
+  margin-bottom: 44px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(176,125,42,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-kicker {
+  font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold-lt); opacity: .7; margin-bottom: 16px;
+}
+.hero-h {
+  font-family: 'Lora', serif;
+  font-size: 42px; line-height: 1.1; letter-spacing: -.01em;
+  color: #FAF8F4; margin-bottom: 12px;
+}
+.hero-h em { color: var(--gold-lt); font-style: italic; }
+.hero-body {
+  font-size: 13.5px; font-weight: 300;
+  color: rgba(250,248,244,0.45); max-width: 560px; line-height: 1.8;
+}
+
+/* ── SECTION HEADER ── */
+.sec-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 7px;
+}
+.sec-h {
+  font-family: 'Lora', serif;
+  font-size: 26px; color: var(--ink); margin-bottom: 5px;
+}
+.sec-p {
+  font-size: 13px; font-weight: 300; color: var(--sub);
+  margin-bottom: 28px; line-height: 1.75; max-width: 660px;
+}
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+/* ══ TAB 1 — WHY ══ */
+
+.eeeat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 28px;
+}
+.eeeat-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 16px 14px;
+  border-top: 3px solid var(--gold);
+}
+.eeeat-letter {
+  font-family: 'Lora', serif;
+  font-size: 28px; color: var(--gold); line-height: 1; margin-bottom: 6px;
+}
+.eeeat-word { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.eeeat-def { font-size: 11.5px; font-weight: 300; color: var(--sub); line-height: 1.6; }
+
+.notice-box {
+  background: var(--red-bg);
+  border: 1px solid rgba(176,43,32,0.15);
+  border-left: 3px solid var(--red);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin-bottom: 28px;
+}
+.notice-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+.notice-body { font-size: 12.5px; font-weight: 300; color: var(--sub); line-height: 1.75; }
+.notice-body strong { font-weight: 600; color: var(--text); }
+
+/* competitor table */
+.comp-tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 10px; }
+.comp-tbl th {
+  font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: 9px 14px; background: var(--cream2); color: var(--muted);
+  text-align: left; border-bottom: 2px solid var(--border);
+}
+.comp-tbl td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.comp-tbl tr:last-child td { border-bottom: none; }
+.comp-tbl tr:hover td { background: #FAFAF8; }
+.comp-name { font-weight: 600; color: var(--ink); }
+.comp-link { color: var(--blue); text-decoration: none; font-weight: 500; }
+.comp-link:hover { text-decoration: underline; }
+.comp-author { font-weight: 500; color: var(--text); }
+.comp-role { font-size: 11px; font-weight: 300; color: var(--muted); }
+.comp-note {
+  font-size: 11px; font-style: italic; color: var(--muted);
+  padding: 10px 14px; background: var(--cream2);
+  border-radius: 0 0 8px 8px; border: 1px solid var(--border); border-top: none;
+  line-height: 1.65;
+}
+
+.rec-box {
+  background: var(--green-bg);
+  border: 1px solid rgba(42,96,72,0.15);
+  border-left: 3px solid var(--green);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin-top: 24px;
+}
+.rec-title { font-size: 13px; font-weight: 600; color: var(--green); margin-bottom: 5px; }
+.rec-body { font-size: 12.5px; font-weight: 300; color: var(--sub); line-height: 1.75; }
+.rec-body strong { font-weight: 600; color: var(--text); }
+
+/* ══ TAB 2 — AUTHOR LIST ══ */
+
+.author-tbl { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed; }
+.author-tbl th {
+  font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 9px 12px; background: var(--cream2); color: var(--muted);
+  text-align: left; border-bottom: 2px solid var(--border);
+}
+.author-tbl td { padding: 12px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; word-wrap: break-word; }
+.author-tbl tr:last-child td { border-bottom: none; }
+.author-tbl tr:hover td { background: #FAFAF8; }
+.author-name { font-weight: 600; color: var(--ink); font-size: 12.5px; }
+.author-title { font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 2px; }
+
+.priority-badge {
+  display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 99px; margin-top: 5px;
+}
+.p-now { background: var(--red-bg); color: var(--red); border: 1px solid rgba(176,43,32,0.2); }
+.p-q3 { background: var(--cream2); color: var(--muted); border: 1px solid var(--border); }
+
+.req-tag {
+  display: inline-block; font-size: 10px; font-weight: 500;
+  padding: 1px 7px; border-radius: 4px; margin: 1px 2px 1px 0;
+  background: var(--cream2); color: var(--sub); border: 1px solid var(--border);
+}
+.req-tag.required { background: rgba(30,72,128,0.07); color: var(--blue); border-color: rgba(30,72,128,0.18); }
+.req-tag.optional { background: var(--cream2); color: var(--muted); border-color: var(--border); }
+
+.tbl-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+
+.info-note {
+  background: var(--gold-bg);
+  border: 1px solid rgba(176,125,42,0.2);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 28px;
+  font-size: 12.5px; font-weight: 300; color: var(--sub); line-height: 1.7;
+}
+.info-note strong { font-weight: 600; color: var(--text); }
+
+/* ══ TAB 3 — WORKFLOW ══ */
+
+.timeline { margin-bottom: 32px; }
+.tl-step {
+  display: flex; gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tl-step:last-child { border-bottom: none; }
+.tl-left { width: 120px; flex-shrink: 0; }
+.tl-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--ink); color: #FAF8F4;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif; font-size: 16px; font-weight: 600;
+  margin-bottom: 6px;
+}
+.tl-when { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); line-height: 1.4; }
+.tl-right { flex: 1; padding-top: 4px; }
+.tl-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.tl-body { font-size: 12.5px; font-weight: 300; color: var(--sub); line-height: 1.75; margin-bottom: 8px; }
+.tl-body strong { font-weight: 600; color: var(--text); }
+
+.note-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 500;
+  padding: 5px 12px; border-radius: 99px; margin-top: 4px; margin-right: 6px;
+}
+.nt-warn { background: var(--orange-bg); color: var(--orange); border: 1px solid rgba(184,92,42,0.2); }
+.nt-info { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(30,72,128,0.2); }
+.nt-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(42,96,72,0.2); }
+
+.warning-box {
+  background: var(--orange-bg);
+  border: 1px solid rgba(184,92,42,0.18);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px; margin-top: 24px;
+  font-size: 12.5px; font-weight: 300; color: var(--sub); line-height: 1.75;
+}
+.warning-box strong { font-weight: 600; color: var(--orange); display: block; margin-bottom: 3px; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+
+@media (max-width: 768px) {
+  .topbar, .nav { padding: 0 20px; }
+  .inner { padding: 28px 20px 80px; }
+  .hero { padding: 30px 24px; }
+  .hero-h { font-size: 30px; }
+  .eeeat-grid { grid-template-columns: 1fr 1fr; }
+  .tl-left { width: 80px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="logo">orient<b>●</b></div>
+    <span class="logo-sub">Human intelligence at scale</span>
+  </div>
+  <div class="topbar-right">Author Program · Internal</div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn on" onclick="show('why', this)">01 — Overview</button>
+  <button class="nav-btn" onclick="show('authors', this)">02 — Author Requirement</button>
+  <button class="nav-btn" onclick="show('workflow', this)">03 — Timeline</button>
+</div>
+
+
+<!-- ══════════════════════════════
+     TAB 1 — WHY IT MATTERS
+══════════════════════════════ -->
+<div id="p-why" class="page on">
+<div class="inner">
+
+  <div class="hero">
+    <div class="hero-kicker">Author Program · Orient Software · 2026</div>
+    <div class="hero-h">A proposal to assign<br><em>subject-matter experts</em><br>as the primary authors<br>of Orient Software's blog.</div>
+    <div class="hero-body">This replaces content writers in the author field with engineers, architects, and company leadership — the people with verifiable expertise in the topics being written about.</div>
+  </div>
+
+  <div class="sec-label">Why This Matters</div>
+  <div class="sec-h" style="margin-bottom:20px">Two reasons Orient needs this now</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px">
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:10px">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--ink);color:#FAF8F4;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;margin-top:1px">1</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px">Google evaluates content quality through E-E-A-T</div>
+        <div style="font-size:12.5px;font-weight:300;color:var(--sub);line-height:1.75">One of the clearest signals Google reads is <strong style="color:var(--text)">who authored the article</strong> — their title, LinkedIn profile, and author page. For technical topics like software architecture or legacy modernization, a content writer carries no verifiable expertise signal. A CTO or senior engineer does.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:10px">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--ink);color:#FAF8F4;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;margin-top:1px">2</div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px">The majority of Orient's blog articles are authored by content writers</div>
+        <div style="font-size:12.5px;font-weight:300;color:var(--sub);line-height:1.75">This means Orient's articles carry a weaker E-E-A-T signal compared to competitors who publish under named engineers, architects, or company leadership — resulting in lower rankings on technical topics where domain expertise is a key ranking factor.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-label">Competitor Proof</div>
+  <div class="tbl-wrap" style="margin-bottom:28px">
+    <table class="comp-tbl">
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Article</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="comp-name">itransition.com</span></td>
+          <td><a class="comp-link" href="https://www.itransition.com/healthcare/virtual-hospital" target="_blank">Virtual Hospital: Key Features, Examples & Implementation Tips</a></td>
+          <td><div class="comp-author">Angelina Sak</div><div class="comp-role">Healthcare Business Analyst</div></td>
+        </tr>
+        <tr>
+          <td><span class="comp-name">getstrada.com</span></td>
+          <td><a class="comp-link" href="https://www.getstrada.com/blog/insurance-software-development" target="_blank">Insurance Software Development: What You Must Know in 2026</a></td>
+          <td><div class="comp-author">Amir Prodensky</div><div class="comp-role">CEO, Strada</div></td>
+        </tr>
+        <tr>
+          <td><span class="comp-name">saigontechnology.com</span></td>
+          <td><a class="comp-link" href="https://saigontechnology.com/blog/agile-methodology/" target="_blank">What Is Agile Methodology? A Complete Guide for 2026</a></td>
+          <td><div class="comp-author">Thanh (Bruce) Pham</div><div class="comp-role">CEO, Saigon Technology</div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="comp-note">All three authors hold roles directly relevant to the topic they are writing about — not content writers.</div>
+  </div>
+
+  <div class="rec-box" style="padding:28px 32px">
+    <div class="rec-title" style="font-size:15px;margin-bottom:10px">Recommendation</div>
+    <div class="rec-body" style="font-size:14px;line-height:1.8">All new and updated blog articles on Orient Software should be attributed to a <strong>domain expert as the primary author</strong>. The content team continues to write — the expert contributes their name, title, and credibility. No additional writing work is required from the authors. This will be applied to the <strong>AI Native campaign first</strong>, then rolled out to all new articles going forward.</div>
+  </div>
+
+  <div class="warning-box" style="margin-top:16px">
+    <strong>→ Requires approval from Marketing Manager</strong>
+    This proposal needs sign-off before implementation begins. Once approved, the timeline in Tab 03 will be initiated.
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(176,125,42,0.2)">
+      <strong>⚠ Action required — Content Team</strong>
+      The Content Team must be notified in advance of this change. Going forward, every new article brief should include the assigned author name before writing begins. Content writers continue their work as usual — the only change is that a domain expert's name replaces theirs on the published article.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-label">Expected Outcomes</div>
+  <div class="sec-p" style="margin-bottom:20px">Projected impact based on industry benchmarks and comparable B2B software company case studies. All figures are estimates — results will be tracked and reported quarterly.</div>
+
+  <!-- Outcome cards row -->
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 18px 16px;border-top:3px solid var(--green)">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Audited & updated articles</div>
+      <div style="font-size:26px;font-family:'Lora',serif;color:var(--green);line-height:1;margin-bottom:4px">+3–8 positions</div>
+      <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Expected ranking improvement</div>
+      <div style="font-size:11px;font-weight:300;color:var(--sub);line-height:1.6">For audited articles that are re-published under a domain expert byline, we expect a modest position gain on their primary keyword — particularly for articles currently ranking between position 8–20. Scope: articles with confirmed author update + content audit.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 18px 16px;border-top:3px solid var(--blue)">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">New articles from June 2026</div>
+      <div style="font-size:26px;font-family:'Lora',serif;color:var(--blue);line-height:1;margin-bottom:4px">Stronger baseline</div>
+      <div style="font-size:12px;font-weight:600;color:var(--ink);margin-bottom:4px">Higher E-E-A-T signal from day one</div>
+      <div style="font-size:11px;font-weight:300;color:var(--sub);line-height:1.6">New articles published under a verified expert author start with a stronger authority signal than content-writer-attributed equivalents. No numeric target is set — this is a quality floor, not a performance KPI.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:12px 18px;font-size:12px;font-weight:300;color:var(--muted);line-height:1.7;margin-bottom:20px">
+    <strong style="font-weight:600;color:var(--sub)">How we'll measure:</strong> Capture ranking positions of all audited articles <em>before</em> author change (baseline). Re-check at Month 3 and Month 6. Compare same articles, same keywords. No external benchmark needed.
+  </div>
+
+  <!-- Deliverables -->
+  <div style="background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px">
+    <div style="padding:12px 20px;background:var(--cream2);border-bottom:1px solid var(--border)">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">Concrete deliverables by end of Q2</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--border)">
+      <div style="width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0">1</div>
+      <div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--ink)">4 author pages live on orientsoftware.com</div>
+        <div style="font-size:11.5px;font-weight:300;color:var(--sub);margin-top:2px">Øyvind · Son Nguyen · AI/ML Lead · Software Architect — each with photo, bio, expertise tags, LinkedIn, and Person schema markup.</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--border)">
+      <div style="width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0">2</div>
+      <div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--ink)">100% of new articles published with expert author from June onwards</div>
+        <div style="font-size:11.5px;font-weight:300;color:var(--sub);margin-top:2px">No new article goes live without an assigned domain expert byline. Content team workflow updated accordingly.</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;padding:13px 20px">
+      <div style="width:24px;height:24px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0">3</div>
+      <div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--ink)">Baseline SEO report for tracking</div>
+        <div style="font-size:11.5px;font-weight:300;color:var(--sub);margin-top:2px">Current ranking positions captured for all audited articles before author change — used as the comparison baseline at Month 3 and Month 6.</div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════
+     TAB 2 — AUTHOR LIST
+══════════════════════════════ -->
+<div id="p-authors" class="page">
+<div class="inner-wide">
+
+  <div class="sec-label">Author Requirements</div>
+  <div class="sec-h">Orient Software — Author Requirement Table</div>
+  <div class="sec-p">Four authors are required for Q2. The remaining authors will be onboarded later based on content needs.</div>
+
+  <div class="tbl-wrap">
+    <table class="author-tbl">
+      <colgroup>
+        <col style="width:13%">
+        <col style="width:12%">
+        <col style="width:5%">
+        <col style="width:22%">
+        <col style="width:25%">
+        <col style="width:16%">
+        <col style="width:7%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Job Title</th>
+          <th style="text-align:center">Exp</th>
+          <th>Topics Covered</th>
+          <th>Info Required</th>
+          <th>Optional Info</th>
+          <th>Timeline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="author-name">Øyvind Forsbak <span style="font-size:11px;font-weight:400;color:var(--muted)">(CEO)</span></div></td>
+          <td><div class="author-title">Chief Executive Officer</div></td>
+          <td style="text-align:center"><div style="font-size:15px;font-weight:700;color:var(--ink);font-family:'Lora',serif">20+</div><div style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:.04em">years</div></td>
+          <td style="font-size:11.5px;color:var(--sub)">Vision & Strategy · Business Leadership · Company News · Market Trends · Digital Transformation</td>
+          <td>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:5px">For Short bio (25–40 words)</div>
+            <span class="req-tag required">Official job title</span>
+            <span class="req-tag required">Years of experience</span>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">LinkedIn URL</span>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:8px 0 5px">For Full bio (100–150 words)</div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:5px;line-height:1.5">Optimise existing bio from website. Collect to expand:</div>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">Vision / philosophy (1–2 sentences)</span>
+            <span class="req-tag required">Portrait photo — use existing company photo</span>
+          </td>
+          <td><span class="req-tag optional">GitHub URL</span><br><span class="req-tag optional">Speaking / media appearances</span></td>
+          <td><span class="priority-badge p-now">Q2 2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="author-name">Son Nguyen <span style="font-size:11px;font-weight:400;color:var(--muted)">(CTO)</span></div></td>
+          <td><div class="author-title">Chief Technology Officer</div></td>
+          <td style="text-align:center"><div style="font-size:15px;font-weight:700;color:var(--ink);font-family:'Lora',serif">15+</div><div style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:.04em">years</div></td>
+          <td style="font-size:11.5px;color:var(--sub)">Technology & Innovation · AI / Automation · System Architecture · Security & Infrastructure · Tech Strategy · Cost & ROI Guide</td>
+          <td>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:5px">For Short bio (25–40 words)</div>
+            <span class="req-tag required">Official job title</span>
+            <span class="req-tag required">Years of experience</span>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">LinkedIn URL</span>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:8px 0 5px">For Full bio (100–150 words)</div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:5px;line-height:1.5">Optimise existing bio from website. Collect to expand:</div>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">Current technical focus at Orient</span>
+            <span class="req-tag required">Portrait photo — use existing company photo</span>
+          </td>
+          <td><span class="req-tag optional">GitHub URL</span><br><span class="req-tag optional">Speaking / media appearances</span></td>
+          <td><span class="priority-badge p-now">Q2 2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="author-name">[AI/ML Lead Name]</div></td>
+          <td><div class="author-title">AI/ML Engineer / Data Scientist</div></td>
+          <td style="text-align:center"><div style="font-size:15px;font-weight:700;color:var(--muted);font-family:'Lora',serif">TBD</div><div style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:.04em">years</div></td>
+          <td style="font-size:11.5px;color:var(--sub)">AI Development & Strategy · Machine Learning & Deep Learning · LLM & Generative AI · Computer Vision / NLP · MLOps & AI Infrastructure · AI Ethics & Responsible AI</td>
+          <td>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:5px">For Short bio (25–40 words)</div>
+            <span class="req-tag required">Official job title</span>
+            <span class="req-tag required">Years of experience</span>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">LinkedIn URL</span>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:8px 0 5px">For Full bio (100–150 words)</div>
+            <span class="req-tag required">Industries / project types worked on</span>
+            <span class="req-tag required">Notable numbers (projects, scale...)</span>
+            <span class="req-tag required">Education — degree + major</span>
+            <span class="req-tag required">Current technical activities</span>
+            <span class="req-tag required">Portrait photo — use existing company photo</span>
+          </td>
+          <td>
+            <span class="req-tag optional">GitHub URL</span>
+            <span class="req-tag optional">Kaggle profile</span>
+            <span class="req-tag optional">Hugging Face</span>
+            <span class="req-tag optional">Research papers</span>
+            <span class="req-tag optional">Certifications</span>
+          </td>
+          <td><span class="priority-badge p-now">Q2 2026</span></td>
+        </tr>
+        <tr>
+          <td><div class="author-name">[Software Architect Name]</div></td>
+          <td><div class="author-title">Software Architect / Lead Developer</div></td>
+          <td style="text-align:center"><div style="font-size:15px;font-weight:700;color:var(--muted);font-family:'Lora',serif">TBD</div><div style="font-size:9px;color:var(--muted);font-weight:400;letter-spacing:.04em">years</div></td>
+          <td style="font-size:11.5px;color:var(--sub)">Software Architecture · Clean Code & Best Practices · System Design · DevOps & CI/CD · API Development</td>
+          <td>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:5px">For Short bio (25–40 words)</div>
+            <span class="req-tag required">Official job title</span>
+            <span class="req-tag required">Years of experience</span>
+            <span class="req-tag required">2–3 areas of expertise</span>
+            <span class="req-tag required">LinkedIn URL</span>
+            <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:8px 0 5px">For Full bio (100–150 words)</div>
+            <span class="req-tag required">Industries / project types worked on</span>
+            <span class="req-tag required">Notable numbers (projects, scale...)</span>
+            <span class="req-tag required">Education — degree + major</span>
+            <span class="req-tag required">Current technical activities</span>
+            <span class="req-tag required">Portrait photo — use existing company photo</span>
+          </td>
+          <td>
+            <span class="req-tag optional">GitHub URL</span>
+            <span class="req-tag optional">Portfolio / project links</span>
+            <span class="req-tag optional">Certifications</span>
+          </td>
+          <td><span class="priority-badge p-now">Q2 2026</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:var(--cream2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-size:12px;font-weight:300;color:var(--sub);line-height:1.75">
+    <strong style="font-weight:600;color:var(--text)">Next phase:</strong> If the Q2 pilot is successful, additional expert authors (Backend, Web, Mobile, Fintech, HealthTech leads) will be proposed for onboarding in Q3–Q4 2026 based on content needs and ranking results.
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════
+     TAB 3 — WORKFLOW
+══════════════════════════════ -->
+<div id="p-workflow" class="page">
+<div class="inner-wide">
+
+  <div class="sec-label">Implementation Plan</div>
+  <div class="sec-h">Workflow — May – August 2026</div>
+  <div class="sec-p">Three steps from information collection to full rollout across all Q2 content.</div>
+
+  <!-- Gantt -->
+  <div style="margin-bottom:28px">
+  <table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed">
+    <colgroup>
+      <col style="width:11%">
+      <col style="width:22%">
+      <col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+      <col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+      <col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+      <col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%"><col style="width:3.5%">
+    </colgroup>
+    <thead>
+      <tr>
+        <th style="padding:9px 10px;background:var(--cream2);color:var(--muted);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--border)">PIC</th>
+        <th style="padding:9px 10px;background:var(--cream2);color:var(--muted);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:left;border-bottom:2px solid var(--border)">Action</th>
+        <!-- MAY -->
+        <th colspan="4" style="padding:9px 0;background:var(--cream2);color:var(--blue);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">MAY</th>
+        <!-- JUN -->
+        <th colspan="4" style="padding:9px 0;background:var(--cream2);color:var(--green);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">JUN</th>
+        <!-- JUL -->
+        <th colspan="4" style="padding:9px 0;background:var(--cream2);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">JUL</th>
+        <!-- AUG -->
+        <th colspan="4" style="padding:9px 0;background:var(--cream2);color:var(--orange);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">AUG</th>
+      </tr>
+      <tr>
+        <th style="padding:6px 14px;background:var(--cream2);border-bottom:2px solid var(--border)"></th>
+        <th style="padding:6px 14px;background:var(--cream2);border-bottom:2px solid var(--border)"></th>
+        <!-- May weeks -->
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">W1</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W2</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W3</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W4</th>
+        <!-- Jun weeks -->
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">W1</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W2</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W3</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W4</th>
+        <!-- Jul weeks -->
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">W1</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W2</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W3</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W4</th>
+        <!-- Aug weeks -->
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border);border-left:1px solid var(--border)">W1</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W2</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W3</th>
+        <th style="padding:6px 8px;background:var(--cream2);color:var(--muted2);font-size:9px;font-weight:600;text-align:center;border-bottom:2px solid var(--border)">W4</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Row 1 -->
+      <tr>
+        <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-size:11px;font-weight:500;color:var(--sub)">SEO<div style="font-size:10px;color:var(--muted);margin-top:2px;font-weight:300">Support needed from<br>Digital Lead / MKT Manager</div></td>
+        <td style="padding:10px 10px;border-bottom:1px solid var(--border)">
+          <div style="font-weight:600;color:var(--ink);font-size:12.5px">Collect author information</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.9">
+            Øyvind · Son Nguyen · AI/ML Lead · Software Architect<br>
+            <span style="color:var(--green);font-weight:500">✓ Portrait photo — use existing company photo</span><br>
+            <strong style="color:var(--text)">All 4 — For Short bio:</strong> Job title · Years of exp · 2–3 areas of expertise · LinkedIn URL<br>
+            <strong style="color:var(--text)">CEO &amp; CTO — For Full bio:</strong> Optimise existing bio from website · add Expertise · Vision/philosophy (CEO) · Current technical focus (CTO)<br>
+            <strong style="color:var(--text)">AI/ML &amp; Architect — For Full bio:</strong> Industries worked · Notable numbers · Education · Current activities<br>
+            <span style="font-weight:300;color:var(--muted)">Optional: GitHub · Certifications · Portfolio · Speaking appearances</span>
+          </div>
+        </td>
+        <!-- May -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);text-align:center"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center"><div style="background:var(--blue);border-radius:4px;height:20px;width:100%"></div></td>
+        <!-- Jun -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);text-align:center"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <!-- Jul -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <!-- Aug -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+      </tr>
+
+      <!-- Row 2 -->
+      <tr>
+        <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-size:11px;font-weight:500;color:var(--sub)">Content + Dev + SEO</td>
+        <td style="padding:10px 10px;border-bottom:1px solid var(--border)">
+          <div style="font-weight:600;color:var(--ink);font-size:12.5px">Write, build & schema optimise author pages</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">orientsoftware.com/author/[name] · photo, short bio, full bio, Person schema markup</div>
+        </td>
+        <!-- May -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <!-- Jun -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);text-align:center"><div style="background:var(--green);border-radius:4px;height:20px;width:100%"></div></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <!-- Jul -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <!-- Aug -->
+        <td style="padding:8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+        <td style="padding:8px;border-bottom:1px solid var(--border)"></td>
+      </tr>
+
+      <!-- Row 3 -->
+      <tr>
+        <td style="padding:10px 10px;font-size:11px;font-weight:500;color:var(--sub)">SEO + Content</td>
+        <td style="padding:10px 10px">
+          <div style="font-weight:600;color:var(--ink);font-size:12.5px">Publish articles with expert authors</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">All new & audited articles · ongoing through Aug</div>
+        </td>
+        <!-- May -->
+        <td style="padding:8px;border-left:1px solid var(--border)"></td>
+        <td style="padding:8px"></td>
+        <td style="padding:8px"></td>
+        <td style="padding:8px"></td>
+        <!-- Jun -->
+        <td style="padding:8px;border-left:1px solid var(--border)"></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);border-radius:4px 0 0 4px;height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <!-- Jul -->
+        <td style="padding:8px;border-left:1px solid var(--border);text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <!-- Aug -->
+        <td style="padding:8px;border-left:1px solid var(--border);text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);height:20px;width:100%"></div></td>
+        <td style="padding:8px;text-align:center"><div style="background:var(--gold);border-radius:0 4px 4px 0;height:20px;width:100%"></div></td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>
+
+</div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById('p-' + id).classList.add('on');
+  if (btn) btn.classList.add('on');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
