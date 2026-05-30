@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PR Newswire Proposal — Orient Software 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:    #00837E;
+  --teal-l:  #CBD9D8;
+  --teal-ll: #E7EDEC;
+  --dark:    #1A1A18;
+  --dark2:   #2C2C2A;
+  --gold:    #C9A84C;
+  --gold-l:  #E8C96A;
+  --text:    #333333;
+  --muted:   #777777;
+  --bg:      #F5F0E8;
+  --white:   #FFFFFF;
+  --border:  #D5CFC6;
+  --warn:    #E8A020;
+  --green:   #2A7A3A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--dark);
+  padding: 0 48px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.brand { font-family: 'DM Serif Display', serif; font-size: 17px; color: #FFFDF5; }
+.brand span { color: #E03B2E; }
+.brand-tag { font-size: 8px; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,253,245,.3); display: block; margin-top: 2px; }
+.topbar-right { font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,253,245,.35); }
+
+/* ── PAGE ── */
+.page { max-width: 960px; margin: 0 auto; padding: 48px 40px 80px; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 40px 48px 36px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,131,126,.12) 0%, transparent 70%);
+}
+.cover-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold-l); opacity: .8;
+  margin-bottom: 14px;
+}
+.cover-h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px; line-height: 1.1;
+  color: #FFFDF5; letter-spacing: -.02em;
+  margin-bottom: 8px;
+}
+.cover-h1 em { color: var(--gold-l); font-style: italic; }
+.cover-sub { font-size: 13px; font-weight: 300; color: rgba(255,253,245,.4); }
+.cover-meta {
+  display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,253,245,.65);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 99px; padding: 6px 14px;
+}
+.meta-pill .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold-l); display: inline-block;
+}
+
+/* ── SECTION HEAD ── */
+.eyebrow {
+  font-size: 9px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 5px;
+}
+.sec-h {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--dark);
+  margin-bottom: 4px;
+}
+.sec-sub { font-size: 12px; font-weight: 300; color: var(--muted); margin-bottom: 24px; }
+
+/* ── CONTEXT BLOCK ── */
+.context-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 32px;
+}
+.ctx-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.ctx-label {
+  font-size: 9px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 5px;
+}
+.ctx-value { font-size: 12px; font-weight: 400; color: var(--dark); line-height: 1.65; }
+.ctx-value strong { font-weight: 600; }
+
+/* ── ALERT BANNER ── */
+.alert {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #FFF8E8;
+  border: 1px solid rgba(200,140,0,.25);
+  border-left: 3px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 32px;
+  font-size: 12px; color: #5A4000; line-height: 1.7;
+}
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert strong { font-weight: 600; color: #3A2800; display: block; margin-bottom: 3px; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+
+/* ── OPTIONS ── */
+.options-wrap { display: flex; flex-direction: column; gap: 28px; margin-bottom: 40px; }
+
+.option-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.option-hdr {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 24px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.opt-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: 5px 12px;
+  border-radius: 99px; color: var(--white);
+  background: var(--teal); flex-shrink: 0;
+}
+.opt-badge.budget { background: var(--dark); }
+.opt-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--dark); flex: 1; }
+.opt-total {
+  text-align: right;
+}
+.opt-total-label { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+.opt-total-val { font-size: 20px; font-weight: 600; color: var(--teal); font-family: 'DM Serif Display', serif; }
+.opt-total-note { font-size: 10px; color: var(--muted); font-weight: 300; }
+
+/* ── TABLE ── */
+.tbl-wrap { overflow-x: auto; }
+table.pr-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.pr-tbl th {
+  font-size: 9px; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--white);
+  background: var(--teal);
+  padding: 10px 14px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,.15);
+}
+.pr-tbl th:first-child { text-align: center; width: 44px; }
+.pr-tbl th.left { text-align: left; }
+.pr-tbl td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #EEE9E0;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text);
+  background: var(--teal-ll);
+}
+.pr-tbl td.left { text-align: left; }
+.pr-tbl tr:last-child td { border-bottom: none; }
+.pr-tbl tr:hover td { background: #dde8e7; }
+.product-name { font-weight: 600; color: var(--dark); display: block; }
+.product-sub { font-size: 10px; font-weight: 300; color: var(--muted); margin-top: 2px; display: block; }
+.photo-name { font-weight: 500; color: var(--dark2); }
+
+/* ── PRICE CELLS ── */
+.price { font-size: 13px; font-weight: 500; color: var(--dark); }
+.price-hi { font-size: 13px; font-weight: 600; color: var(--teal); }
+.price-flat { font-size: 10px; font-weight: 400; color: var(--muted); font-style: italic; }
+
+/* ── TOTAL ROW ── */
+.total-row td {
+  background: var(--teal-l) !important;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dark) !important;
+  padding: 14px;
+}
+.total-row td.total-label {
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dark2) !important;
+}
+
+/* ── KPI CHIP ── */
+.kpi {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9.5px; font-weight: 700;
+  background: rgba(0,131,126,.1);
+  color: var(--teal);
+  border: 1px solid rgba(0,131,126,.2);
+  border-radius: 99px;
+  padding: 2px 8px;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* ── RECOMMENDATION BOX ── */
+.rec-box {
+  background: rgba(0,131,126,.06);
+  border: 1px solid rgba(0,131,126,.2);
+  border-left: 3px solid var(--teal);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 16px 16px;
+  font-size: 12px; color: #1A4A48; line-height: 1.7;
+}
+.rec-box strong {
+  font-size: 9.5px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  display: block; margin-bottom: 4px; color: var(--teal);
+}
+
+/* ── PENDING NOTE ── */
+.pending-note {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #FEF3E2;
+  border: 1px solid rgba(200,140,0,.2);
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin: 0 16px 16px;
+  font-size: 11px; color: #6B4400; line-height: 1.65;
+}
+
+/* ── NOTES SECTION ── */
+.notes-section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.notes-hdr {
+  background: var(--dark2);
+  padding: 14px 24px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gold-l);
+}
+.notes-body { padding: 0; }
+.note-row {
+  display: grid; grid-template-columns: 180px 1fr;
+  border-bottom: 1px solid #EEE9E0;
+}
+.note-row:last-child { border-bottom: none; }
+.note-label {
+  padding: 14px 20px;
+  background: var(--teal-ll);
+  font-size: 11px; font-weight: 600;
+  color: var(--dark2);
+  border-right: 1px solid var(--border);
+}
+.note-val {
+  padding: 14px 20px;
+  font-size: 11px; font-weight: 300;
+  color: var(--text); line-height: 1.75;
+}
+.note-val a { color: var(--teal); text-decoration: none; }
+.note-val a:hover { text-decoration: underline; }
+
+/* ── PAYMENT SECTION ── */
+.payment-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 32px;
+}
+.pay-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+.pay-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 10px;
+}
+.pay-val { font-size: 12px; font-weight: 300; color: var(--dark); line-height: 1.8; }
+.pay-val strong { font-weight: 600; }
+.pay-val .account-no {
+  display: inline-block;
+  background: var(--teal-ll);
+  border: 1px solid var(--teal-l);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px; font-weight: 500;
+  color: var(--dark);
+  margin-top: 8px;
+  font-family: monospace;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 10px; color: var(--muted);
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  line-height: 1.8;
+}
+.footer a { color: var(--teal); text-decoration: none; }
+
+/* ── BUDGET COMPARE ── */
+.budget-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px;
+}
+.budget-card {
+  min-width: 0;
+  border-radius: 12px; padding: 18px 20px;
+  border: 1px solid;
+}
+.bc-1 { background: rgba(0,131,126,.05); border-color: rgba(0,131,126,.2); }
+.bc-2 { background: rgba(201,168,76,.07); border-color: rgba(201,168,76,.3); }
+.bc-label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+.bc-1 .bc-label { color: var(--teal); }
+.bc-2 .bc-label { color: #8A6010; }
+.bc-option { font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+.bc-price { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--teal); }
+.bc-2 .bc-price { color: #8A6010; }
+.bc-sub { font-size: 11px; font-weight: 300; color: var(--muted); margin-top: 3px; }
+.bc-markets { font-size: 11px; font-weight: 400; color: var(--dark); margin-top: 8px; line-height: 1.6; }
+.bc-check { color: var(--green); font-weight: 600; }
+.bc-warn { color: var(--warn); font-weight: 500; font-size: 10px; margin-top: 6px; }
+
+@media(max-width: 720px) {
+  .page { padding: 24px 20px 60px; }
+  .topbar { padding: 0 20px; }
+  .cover { padding: 28px 24px; }
+  .cover-h1 { font-size: 28px; }
+  .context-grid, .payment-grid { grid-template-columns: 1fr; }
+  .note-row { grid-template-columns: 1fr; }
+  .note-label { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* ── STICKY TOC ── */
+.toc-sidebar {
+  position: fixed;
+  left: max(8px, calc(50% - 640px));
+  top: 120px;
+  width: 148px;
+  background: #FFFFFF;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 0;
+  z-index: 90;
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+}
+.toc-title {
+  font-size: 8px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 0 16px 10px;
+  border-bottom: 1px solid #F0EDE8;
+  margin-bottom: 6px;
+}
+.toc-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 16px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 11px; font-weight: 400;
+  transition: all .15s;
+  border-left: 2px solid transparent;
+}
+.toc-link:hover, .toc-link.active {
+  color: var(--teal);
+  background: rgba(0,131,126,.04);
+  border-left-color: var(--teal);
+}
+.toc-link .toc-num {
+  font-size: 9px; font-weight: 700;
+  color: var(--teal); min-width: 16px;
+  opacity: .6;
+}
+.toc-link.active .toc-num { opacity: 1; }
+@media(max-width: 1260px) { .toc-sidebar { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="brand">orient<span>●</span></div>
+    <span class="brand-tag">Human intelligence at scale</span>
+  </div>
+  <div class="topbar-right">PR Newswire Proposal · 2026</div>
+</div>
+
+<div class="page">
+
+<nav class="toc-sidebar" id="toc-sidebar">
+  <div class="toc-title">Contents</div>
+  <a class="toc-link" href="#s-overview"><span class="toc-num">00</span>Overview</a>
+  <a class="toc-link" href="#s-rec"><span class="toc-num">01</span>Recommendation</a>
+  <a class="toc-link" href="#s-brief"><span class="toc-num">09</span>Strategic Brief</a>
+  <a class="toc-link" href="#s-options"><span class="toc-num">02</span>Options at a Glance</a>
+  <a class="toc-link" href="#s-pricing"><span class="toc-num">03</span>Detailed Pricing</a>
+  <a class="toc-link" href="#s-kpi"><span class="toc-num">04</span>KPI & Syndication</a>
+  <a class="toc-link" href="#s-samples"><span class="toc-num">05</span>Sample Reports</a>
+  <a class="toc-link" href="#s-notes"><span class="toc-num">06</span>Submission Notes</a>
+  <a class="toc-link" href="#s-content"><span class="toc-num">07</span>Content Team</a>
+  <a class="toc-link" href="#s-payment"><span class="toc-num">08</span>Payment</a>
+</nav>
+
+
+  <!-- ── COVER ── -->
+  <div class="cover">
+    <div class="cover-label">Global Communications Proposal · Internal Review</div>
+    <div class="cover-h1">Orient Software <em>×</em><br>PR Newswire</div>
+    <div class="cover-sub">20th Anniversary · AI-Native / Spec-Driven Campaign · Distribution Options</div>
+    <div class="cover-meta">
+      <div class="meta-pill"><span class="dot"></span> W4 May 2026</div>
+      <div class="meta-pill"><span class="dot"></span> AU + EU Target Markets</div>
+      <div class="meta-pill"><span class="dot"></span> Technology Wire</div>
+      <div class="meta-pill"><span class="dot"></span> Budget: $1,000 – $1,500</div>
+    </div>
+  </div>
+
+  <!-- ── OVERVIEW ── -->
+  <div id="s-overview"></div>
+  <div class="eyebrow">Overview</div>
+  <div class="sec-h">Cost & Reality Assessment</div>
+  <div class="sec-sub" style="margin-bottom:20px;">A plain-language summary of what each option delivers, what it costs, and what to expect realistically.</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:36px;">
+
+    <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div style="background:var(--dark);padding:12px 20px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);">What PR Newswire Does</span>
+      </div>
+      <div style="padding:16px 20px;font-size:12px;color:var(--text);line-height:1.8;">
+        PR Newswire distributes the press release to a network of media outlets that have subscribed to their feed. These outlets <strong>automatically publish</strong> the release — this is called <strong>syndication</strong>. The KPI link count measures how many of these auto-pickups occur. Most syndicated outlets are general news sites. Tech-specific coverage (earned media) happens when a tech journalist independently decides to cover the story — this cannot be bought or guaranteed.
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div style="background:var(--dark);padding:12px 20px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);">Cost vs. Reality — Three Options</span>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:grid;grid-template-columns:220px 120px 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:9px 16px;background:#F7F4EF;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border);"></div>
+          <div style="padding:9px 16px;background:#F7F4EF;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--border);text-align:center;">Cost (500w)</div>
+          <div style="padding:9px 16px;background:#F7F4EF;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">What You Actually Get</div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 120px 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:14px 16px;font-size:11px;font-weight:700;color:var(--teal);border-right:1px solid var(--border);">Option 1<br><span style="font-weight:400;color:var(--muted);font-size:10px;">APAC English Only + Photo</span></div>
+          <div style="padding:14px 16px;font-size:14px;font-weight:700;color:var(--dark);border-right:1px solid var(--border);text-align:center;">$1,500<br><span style="font-size:9px;font-weight:400;color:var(--muted);">500w + 1 photo</span></div>
+          <div style="padding:14px 16px;font-size:11px;color:var(--text);line-height:1.75;">Min. 60 syndication links across APAC. IT/Internet category available → higher chance of tech outlet pickup. <strong>Nordics not covered.</strong> Only option within Scenario B budget.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 120px 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:14px 16px;font-size:11px;font-weight:700;color:#6B3A6B;border-right:1px solid var(--border);">Option 2<br><span style="font-weight:400;color:var(--muted);font-size:10px;">Australia + Europe English Only + Photo</span></div>
+          <div style="padding:14px 16px;font-size:14px;font-weight:700;color:var(--dark);border-right:1px solid var(--border);text-align:center;">$3,154<br><span style="font-size:9px;font-weight:400;color:var(--muted);">500w + 1 photo</span></div>
+          <div style="padding:14px 16px;font-size:11px;color:var(--text);line-height:1.75;">Australia (~15 links, Technology category available) + Europe (~20 links, no category). Smaller APAC reach vs Option 1 — Australia only, no SG/HK/MY. Nordics covered via EU wire.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:220px 120px 1fr;">
+          <div style="padding:14px 16px;font-size:11px;font-weight:700;color:#8A6010;border-right:1px solid var(--border);">Option 3<br><span style="font-weight:400;color:var(--muted);font-size:10px;">APAC + Europe English Only + Photo</span></div>
+          <div style="padding:14px 16px;font-size:14px;font-weight:700;color:var(--dark);border-right:1px solid var(--border);text-align:center;">$3,600<br><span style="font-size:9px;font-weight:400;color:var(--muted);">500w + 1 photo</span></div>
+          <div style="padding:14px 16px;font-size:11px;color:var(--text);line-height:1.75;">APAC (min. 60 links) + Europe English Only (~20 links) — Nordics covered. Europe package has <strong>no trade category selection</strong> → European links will be general news syndication only.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+      <div style="background:var(--dark);padding:12px 20px;">
+        <span style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-l);">Key Considerations</span>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0;padding:12px 20px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text);line-height:1.75;align-items:start;">
+          <span style="color:var(--teal);font-weight:700;padding-top:1px;">1</span>
+          <span><strong>KPI ≠ tech media guarantee.</strong> The 60+ links for APAC are syndication pickups — mostly general news. Tech-specific earned coverage is unpredictable but more likely when IT/Internet category is selected.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0;padding:12px 20px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text);line-height:1.75;align-items:start;">
+          <span style="color:var(--teal);font-weight:700;padding-top:1px;">2</span>
+          <span><strong>KPI is not in the contract.</strong> PR Newswire does not legally commit to any link count — KPI figures are estimates provided at pitching stage only.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0;padding:12px 20px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text);line-height:1.75;align-items:start;">
+          <span style="color:var(--teal);font-weight:700;padding-top:1px;">3</span>
+          <span><strong>Europe English Only = general syndication only.</strong> No trade category selection — all European links will be from general news outlets, not tech-specific media.</span>
+        </div>
+        <div style="display:grid;grid-template-columns:28px 1fr;gap:0;padding:12px 20px;font-size:12px;color:var(--text);line-height:1.75;align-items:start;">
+          <span style="color:var(--teal);font-weight:700;padding-top:1px;">4</span>
+          <span><strong>Primary value is brand signal + backlinks.</strong> Press release distribution builds domain authority and brand awareness. It is not a direct lead generation channel.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── RECOMMENDATION ── -->
+  <div id="s-rec"></div>
+  <div style="background:#FFFFFF;border:2px solid var(--teal);border-radius:14px;padding:28px 32px;margin-bottom:36px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(0,131,126,.06) 0%,transparent 70%);pointer-events:none;"></div>
+    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--teal);border-radius:99px;padding:4px 12px;margin-bottom:14px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#FFFFFF;">✦ SEO Team Recommendation</span>
+    </div>
+    <div style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--dark);margin-bottom:4px;line-height:1.2;">
+      Option 1 — APAC English Only
+    </div>
+    <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--teal);font-style:italic;margin-bottom:20px;">$1,500 flat fee</div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text);line-height:1.75;">
+        <span style="color:var(--teal);font-weight:700;flex-shrink:0;font-size:14px;margin-top:-1px;">✓</span>
+        <span><strong>Only option within budget ($1,000–$1,500).</strong> Options 2 and 3 are $3,154–$3,600 — more than double the approved budget range.</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text);line-height:1.75;">
+        <span style="color:var(--teal);font-weight:700;flex-shrink:0;font-size:14px;margin-top:-1px;">✓</span>
+        <span><strong>IT/Internet category available</strong> — higher chance of tech outlet pickup across APAC (AU, SG, HK, MY, NZ, PH, KR, TW, TH, VN).</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text);line-height:1.75;">
+        <span style="color:var(--teal);font-weight:700;flex-shrink:0;font-size:14px;margin-top:-1px;">✓</span>
+        <span><strong>Flat fee — no word count risk.</strong> Release can be 400–600 words with no additional charge.</span>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text);line-height:1.75;">
+        <span style="color:var(--teal);font-weight:700;flex-shrink:0;font-size:14px;margin-top:-1px;">✓</span>
+        <span><strong>Min. 60 syndication links</strong> across APAC — strongest KPI relative to cost among all three options.</span>
+      </div>
+    </div>
+
+    <div style="background:#F0FAF9;border:1px solid rgba(0,131,126,.2);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 16px;font-size:11.5px;color:#1A4A48;line-height:1.75;">
+      <strong>On Nordics coverage:</strong> Nordics are not covered via wire in Option 1. Per the Communication Plan, Nordics reach is planned via newsletter pitch (June W1) and earned media — not paid wire. Adding Europe English Only to cover Nordics would cost an additional ~$2,100, bringing total to $3,600 (Option 3) — a budget decision for management.
+    </div>
+  </div>
+
+  <div id="s-brief"></div>
+
+
+
+  <!-- ── CONTEXT ── -->
+  <div class="eyebrow">Campaign Context</div>
+  <div class="sec-h">Strategic Brief</div>
+  <div class="sec-sub">Key parameters from Communication Plan Ver2 Apr 2026.</div>
+
+  <div class="context-grid">
+    <div class="ctx-card">
+      <div class="ctx-label">Comm Objective</div>
+      <div class="ctx-value">Orient's whitepaper and Orient One reach tech media in <strong>AU and Nordics</strong> as a substantive intellectual contribution — not a company announcement.</div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-label">Message Direction</div>
+      <div class="ctx-value">Lead with the argument: a software partner publishes analysis of why modernisation fails structurally — and shows what a different approach looks like applied across every layer of the production process.</div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-label">Tone</div>
+      <div class="ctx-value">News-wire neutral. Intellectually substantive. One strong leadership quote that states the argument — not <em>"we are delighted to announce."</em></div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-label">Asset Type</div>
+      <div class="ctx-value"><strong>400–600 word press release.</strong> Inverted pyramid. One leadership quote. Do not include pricing, 2027 internal targets, or any case study not yet formally published.</div>
+    </div>
+  </div>
+
+
+
+  <!-- ── CATEGORY NOTE ── -->
+  <div style="display:flex;align-items:flex-start;gap:12px;background:#E8F5F4;border:1px solid rgba(0,131,126,.2);border-left:3px solid var(--teal);border-radius:8px;padding:14px 18px;margin-bottom:32px;font-size:12px;color:#1A4A48;line-height:1.7;">
+    <div style="font-size:16px;flex-shrink:0;margin-top:1px;">📌</div>
+    <div>
+      <strong style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;">Category at Submission</strong>
+      Select <strong>Technology / IT</strong> as the trade category when submitting to PR Newswire — this ensures the release is prioritised into the tech wire.
+    </div>
+  </div>
+
+  <div id="s-options"></div>
+  <!-- ── BUDGET COMPARE ── -->
+  <div class="eyebrow">Budget Summary</div>
+  <div class="sec-h">Three Options at a Glance</div>
+  <div class="sec-sub">500-word release pricing. Budget guidance from Comm Plan: ~$1,000 (Scenario A) · ~$1,500 (Scenario B).</div>
+
+  <div class="budget-row">
+    <div class="budget-card bc-1">
+      <div class="bc-label">Option 1 — APAC Tech Wire</div>
+      <div class="bc-option">APAC English Only (IT/Internet) + APAC Photo</div>
+      <div class="bc-price">$1,500</div>
+      <div class="bc-sub">500w + 1 photo · flat fee</div>
+      <div style="font-size:11px;font-weight:700;color:var(--teal);margin:6px 0 2px;">Min. 60 links</div>
+      <div class="bc-markets">
+        <span class="bc-check">✓</span> Up to 455 IT/Internet media points<br>
+        <span class="bc-check">✓</span> AU, SG, HK, MY, NZ, PH, KR, TW, TH, VN<br>
+        <span style="color:var(--muted)">✗ Nordics / EU not covered</span>
+      </div>
+      <div style="margin-top:8px;"><a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Fdepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAPAC%20English%20Only%5FIT%5FInternet%5F2026%2Epdf&parent=%2Fsites%2Fofficial%2Fdepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;">↗ APAC IT/Internet media list</a></div>
+    </div>
+    <div class="budget-card" style="border-radius:12px;padding:18px 20px;border:1px solid rgba(139,74,139,.2);background:rgba(139,74,139,.04);">
+      <div class="bc-label" style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;color:#6B3A6B;">Option 2 — AU + EU</div>
+      <div class="bc-option" style="font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;">Australia + Europe English Only</div>
+      <div class="bc-price" style="font-family:'DM Serif Display',serif;font-size:26px;color:#6B3A6B;">$3,154</div>
+      <div class="bc-sub" style="font-size:11px;font-weight:300;color:var(--muted);margin-top:3px;">500w + 1 photo</div>
+      <div style="font-size:11px;font-weight:700;color:#6B3A6B;margin:6px 0 2px;">~15 links (AU) + ~20 links (EU)</div>
+      <div class="bc-markets" style="font-size:11px;font-weight:400;color:var(--dark);margin-top:4px;line-height:1.6;">
+        <span style="color:var(--green);font-weight:600;">✓</span> Australia (~15 links)<br>
+        <span style="color:var(--green);font-weight:600;">✓</span> Nordics incl. (DK, FI, NO, SE)<br>
+        <span style="color:var(--green);font-weight:600;">✓</span> 13 European markets · English
+      </div>
+      <div style="font-size:10px;font-weight:500;color:var(--warn);margin-top:6px;">⚠ Above Scenario B budget</div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px;">
+        <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAustralia%5FTechnology%5FInnovation%5F2025%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;">↗ Australia Technology media list</a>
+        <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FEurope%20English%20Only%20%281%29%20%282%29%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;">↗ Europe English Only media list</a>
+      </div>
+    </div>
+
+    <div class="budget-card bc-2">
+      <div class="bc-label">Option 3 — APAC + EU</div>
+      <div class="bc-option">APAC English Only + Europe English Only + Intl Photo</div>
+      <div class="bc-price">$3,600</div>
+      <div class="bc-sub">500w + 1 photo</div>
+      <div style="font-size:11px;font-weight:700;color:#8A6010;margin:6px 0 2px;">Min. 60 links (APAC) + ~20 links (EU)</div>
+      <div class="bc-markets">
+        <span class="bc-check">✓</span> Up to 455 IT/Internet APAC media points<br>
+        <span class="bc-check">✓</span> Nordics incl. (DK, FI, NO, SE)<br>
+        <span class="bc-check">✓</span> 13 European markets · English
+      </div>
+      <div class="bc-warn">⚠ Above Scenario B budget</div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:3px;">
+        <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Fdepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAPAC%20English%20Only%5FIT%5FInternet%5F2026%2Epdf&parent=%2Fsites%2Fofficial%2Fdepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;">↗ APAC IT/Internet media list</a>
+        <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FEurope%20English%20Only%20%281%29%20%282%29%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;">↗ Europe English Only media list</a>
+      </div>
+    </div>
+    </div>
+
+  <div id="s-pricing"></div>
+
+  <!-- ── OPTIONS ── -->
+  <div class="eyebrow">Distribution Options</div>
+  <div class="sec-h">Detailed Pricing</div>
+  <div class="sec-sub">All prices in USD · PR Newswire 2026 Pricing Guide · Effective January 1, 2026.</div>
+
+  <div class="options-wrap">
+
+    <!-- OPTION 1: APAC English Only -->
+    <div class="option-block">
+      <div class="option-hdr">
+        <span class="opt-badge">Option 1</span>
+        <div class="opt-title">APAC English Only</div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="pr-tbl">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="left">Distribution Service / Product Name</th>
+              <th>Qty</th>
+              <th>Release<br>Word Count<br><span style="font-size:7px;opacity:.65;font-weight:400;">Used for pricing</span></th>
+              <th>400 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base Price</span></th>
+              <th>500 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 1×100w</span></th>
+              <th>600 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 2×100w</span></th>
+              <th>Each Extra<br>100 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Above 400w</span></th>
+            </tr>
+            <tr style="background:#1F5E5A;">
+              <th colspan="4" style="text-align:left;font-size:8px;color:rgba(255,255,255,.45);font-weight:400;padding:5px 14px;border:none;letter-spacing:.06em;">
+                📌 400 words = base price charged by PR Newswire. Every additional 100 words above 400 incurs the "Each Extra 100 Words" charge. APAC English Only is a flat fee — no word count surcharge.
+              </th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="left">
+                <span class="product-name">APAC English Only</span>
+                <span class="product-sub">455 IT/Internet media points across APAC · AU, SG, HK, MY, NZ, PH, KR, TW, TH, VN, ID, JP · English only · IT/Internet category · Flat fee — no word count surcharge</span>
+                <span class="kpi">Min. 60 links</span>
+                <span style="display:inline-block;font-size:9.5px;font-weight:500;color:#1A5A28;background:#E8F5E9;border:1px solid rgba(42,122,58,.2);border-radius:99px;padding:2px 8px;margin-top:4px;">✓ IT/Internet category available</span>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+                  <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAPAC%20English%20Only%5FIT%5FInternet%5F2026%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;background:rgba(0,131,126,.08);padding:4px 10px;border-radius:99px;border:1px solid rgba(0,131,126,.2);">↗ APAC English Only — IT/Internet media list</a>
+                </div>
+              </td>
+              <td>1</td>
+              <td>—</td>
+              <td class="price">1,170.00</td>
+              <td class="price-hi">1,170.00</td>
+              <td class="price">1,170.00</td>
+              <td><span class="price-flat">flat fee</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="left">
+                <span class="photo-name">APAC Photo</span>
+                <span class="product-sub">Applied for APAC distribution · enhances media engagement</span>
+              </td>
+              <td>1</td>
+              <td>—</td>
+              <td class="price">330.00</td>
+              <td class="price">330.00</td>
+              <td class="price">330.00</td>
+              <td><span class="price-flat">flat fee</span></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4" class="total-label">TOTAL A</td>
+              <td>1,500.00</td>
+              <td>1,500.00</td>
+              <td>1,500.00</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec-box">
+        <strong>💡 Option 1 — Key Points</strong>
+        Flat fee $1,500 regardless of word count (400–600w). Covers APAC only — <strong>Nordics and EU are not included</strong>.
+      </div>
+    </div>
+
+    <!-- OPTION 2: Australia + Europe English Only -->
+    <div class="option-block">
+      <div class="option-hdr">
+        <span class="opt-badge" style="background:#6B3A6B;">Option 2</span>
+        <div class="opt-title">Australia + Europe English Only</div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="pr-tbl">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="left">Distribution Service / Product Name</th>
+              <th>Qty</th>
+              <th>Release<br>Word Count<br><span style="font-size:7px;opacity:.65;font-weight:400;">Used for pricing</span></th>
+              <th>400 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base Price</span></th>
+              <th>500 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 1×100w</span></th>
+              <th>600 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 2×100w</span></th>
+              <th>Each Extra<br>100 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Above 400w</span></th>
+            </tr>
+            <tr style="background:#1F5E5A;">
+              <th colspan="4" style="text-align:left;font-size:8px;color:rgba(255,255,255,.45);font-weight:400;padding:5px 14px;border:none;letter-spacing:.06em;">
+                📌 400 words = base price. Every additional 100 words above 400 incurs the "Each Extra 100 Words" charge. International Photo is a flat fee.
+              </th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="left">
+                <span class="product-name">Australia</span>
+                <span class="kpi">~15 links</span>
+                <span style="display:inline-block;font-size:9.5px;font-weight:500;color:#1A5A28;background:#E8F5E9;border:1px solid rgba(42,122,58,.2);border-radius:99px;padding:2px 8px;margin-top:4px;">✓ Technology category available</span>
+                <div style="margin-top:6px;"><a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAustralia%5FTechnology%5FInnovation%5F2025%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;background:rgba(0,131,126,.08);padding:4px 10px;border-radius:99px;border:1px solid rgba(0,131,126,.2);margin-top:6px;">↗ Australia Technology media list</a></div>
+              </td>
+              <td>1</td>
+              <td>500</td>
+              <td class="price">580.00</td>
+              <td class="price-hi">724.00</td>
+              <td class="price">868.00</td>
+              <td class="price">144.00</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="left">
+                <span class="product-name">Europe English Only</span>
+                <span class="product-sub">Coverage: Austria, Belgium, Denmark, Finland, France, Germany, Italy, Netherlands, Spain, Sweden, Switzerland, Norway, United Kingdom · Language: English</span>
+                <span class="kpi">~20 links</span>
+                <span style="display:inline-block;font-size:9.5px;font-weight:500;color:#8B3820;background:#FDE8E0;border:1px solid rgba(180,60,0,.2);border-radius:99px;padding:2px 8px;margin-top:4px;">✗ No trade category selection available</span>
+                <div style="margin-top:6px;">
+                  <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FEurope%20English%20Only%20%281%29%20%282%29%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;background:rgba(0,131,126,.08);padding:4px 10px;border-radius:99px;border:1px solid rgba(0,131,126,.2);">↗ Europe English Only — media list</a>
+                </div>
+              </td>
+              <td>1</td>
+              <td>500</td>
+              <td class="price">1,240.00</td>
+              <td class="price-hi">1,640.00</td>
+              <td class="price">2,040.00</td>
+              <td class="price">400.00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="left">
+                <span class="photo-name">International Photo</span>
+                <span class="product-sub">Applied for distribution to 2 or more regions</span>
+              </td>
+              <td>1</td>
+              <td>—</td>
+              <td class="price">790.00</td>
+              <td class="price">790.00</td>
+              <td class="price">790.00</td>
+              <td><span class="price-flat">flat fee</span></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4" class="total-label">TOTAL A</td>
+              <td>2,610.00</td>
+              <td>3,154.00</td>
+              <td>3,698.00</td>
+              <td>544.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec-box" style="background:rgba(139,74,139,.05);border-color:rgba(139,74,139,.2);border-left-color:#6B3A6B;color:#3A1A3A;">
+        <strong style="color:#6B3A6B;">💡 Option 2 — Key Points</strong>
+        AU wire + Nordics/EU coverage. Lower cost than Option 2 — no APAC multi-country package. <strong>International Photo required for 2+ regions</strong> ($790 flat). Budget approval required.
+      </div>
+    </div>
+
+<!-- OPTION 3: APAC English Only + Europe English Only -->
+    <div class="option-block">
+      <div class="option-hdr">
+        <span class="opt-badge budget">Option 3</span>
+        <div class="opt-title">APAC English Only + Europe English Only</div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="pr-tbl">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="left">Distribution Service / Product Name</th>
+              <th>Qty</th>
+              <th>Release<br>Word Count<br><span style="font-size:7px;opacity:.65;font-weight:400;">Used for pricing</span></th>
+              <th>400 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base Price</span></th>
+              <th>500 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 1×100w</span></th>
+              <th>600 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Base + 2×100w</span></th>
+              <th>Each Extra<br>100 Words<br><span style="font-size:8px;opacity:.75;font-weight:400;">Above 400w</span></th>
+            </tr>
+            <tr style="background:#1F5E5A;">
+              <th colspan="4" style="text-align:left;font-size:8px;color:rgba(255,255,255,.45);font-weight:400;padding:5px 14px;border:none;letter-spacing:.06em;">
+                📌 400 words = base price charged by PR Newswire. Every additional 100 words above 400 incurs the "Each Extra 100 Words" charge.
+              </th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+              <th style="font-size:9px;color:rgba(255,255,255,.6);font-weight:400;">USD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td class="left">
+                <span class="product-name">APAC English Only</span>
+                <span class="kpi">Min. 60 links</span>
+                <span style="display:inline-block;font-size:9.5px;font-weight:500;color:#1A5A28;background:#E8F5E9;border:1px solid rgba(42,122,58,.2);border-radius:99px;padding:2px 8px;margin-top:4px;">✓ IT/Internet category available</span>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+                  <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FAPAC%20English%20Only%5FIT%5FInternet%5F2026%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;background:rgba(0,131,126,.08);padding:4px 10px;border-radius:99px;border:1px solid rgba(0,131,126,.2);">↗ APAC English Only — IT/Internet media list</a>
+                </div>
+              </td>
+              <td>1</td>
+              <td>—</td>
+              <td class="price">1,170.00</td>
+              <td class="price">1,170.00</td>
+              <td class="price">1,170.00</td>
+              <td><span class="price-flat">flat fee</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="left">
+                <span class="product-name">Europe English Only</span>
+                <span class="product-sub">Coverage: Austria, Belgium, Denmark, Finland, France, Germany, Italy, Netherlands, Spain, Sweden, Switzerland, Norway, United Kingdom · Language: English</span>
+                <span class="kpi">~20 links</span>
+                <span style="display:inline-block;font-size:9.5px;font-weight:500;color:#8B3820;background:#FDE8E0;border:1px solid rgba(180,60,0,.2);border-radius:99px;padding:2px 8px;margin-top:4px;">✗ No trade category selection available</span>
+                <div style="margin-top:6px;">
+                  <a href="https://orientsoftware365-my.sharepoint.com/shared?listurl=https%3A%2F%2Forientsoftware365%2Esharepoint%2Ecom%2Fsites%2Fofficial%2Fdepartment%2Dmarketing%2FShared%20Documents&viewid=b375801e%2Dd94e%2D40da%2Dbb75%2Dadea771bfa0f&id=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release%2FEurope%20English%20Only%20%281%29%20%282%29%2Epdf&parent=%2Fsites%2Fofficial%2Ddepartment%2Dmarketing%2FShared%20Documents%2F01%2DOrient%20Software%2F03%2DDigital%2F03%2DPlan%2F2026%2FMay%2FPress%20Release" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:var(--teal);text-decoration:none;background:rgba(0,131,126,.08);padding:4px 10px;border-radius:99px;border:1px solid rgba(0,131,126,.2);">↗ Europe English Only — media list</a>
+                </div>
+              </td>
+              <td>1</td>
+              <td>500</td>
+              <td class="price">1,240.00</td>
+              <td class="price-hi">1,640.00</td>
+              <td class="price">2,040.00</td>
+              <td class="price">400.00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td class="left">
+                <span class="photo-name">International Photo</span>
+                <span class="product-sub">Applied for distribution to 2 or more regions</span>
+              </td>
+              <td>1</td>
+              <td>—</td>
+              <td class="price">790.00</td>
+              <td class="price">790.00</td>
+              <td class="price">790.00</td>
+              <td><span class="price-flat">flat fee</span></td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4" class="total-label">TOTAL A</td>
+              <td>3,200.00</td>
+              <td>3,600.00</td>
+              <td>4,000.00</td>
+              <td>400.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rec-box" style="background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.3);border-left-color:var(--gold);color:#4A3500;">
+        <strong style="color:#8A6010;">💡 Option 3 — Key Points</strong>
+        Broadest reach — covers APAC + Nordics + 13 EU markets. <strong>International Photo required for 2+ regions</strong> ($790 flat). Budget approval required.
+      </div>
+    </div>
+
+
+      </div><!-- /options-wrap -->
+
+  <div id="s-kpi"></div>
+  <!-- ── KPI DISCLAIMER ── -->
+  <div style="background:#FFFFFF;border:1px solid var(--border);border-left:3px solid var(--dark);border-radius:0 10px 10px 0;padding:16px 20px;margin-bottom:32px;">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dark);margin-bottom:10px;">📌 Important — KPI & Syndication</div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text);line-height:1.75;">
+      <div><strong>KPI link counts = syndication only.</strong> When a release is submitted, media outlets that have subscribed to PR Newswire automatically pick up and publish the release — these auto-pickups generate the KPI link count. The majority of these outlets are general news sites that subscribe to all industries, not tech-specific media.</div>
+      <div><strong>Tech-specific coverage = earned media.</strong> Tech outlets (e.g. iTnews, ZDNet, TechRadar) may independently choose to edit and republish the release as their own article — this is earned media and cannot be predicted or guaranteed. However, this is where the most relevant tech audience coverage comes from.</div>
+      <div style="background:#FFF3E0;border:1px solid rgba(200,100,0,.2);border-radius:6px;padding:10px 14px;font-size:11.5px;color:#6B3000;line-height:1.7;">
+        ⚠ <strong>KPI figures are for reference only and are not included in the formal contract.</strong> PR Newswire provides KPI estimates in proposals (pitching stage) but does not legally commit to specific link numbers. Actual results depend on editorial decisions by each outlet.
+      </div>
+    </div>
+  </div>
+
+  <div id="s-samples"></div>
+  <!-- ── SAMPLE REPORTS ── -->
+  <div class="eyebrow">Sample Reports</div>
+  <div class="sec-h">Syndication Results — Reference Cases</div>
+  <div class="sec-sub" style="margin-bottom:16px">Sample distribution reports from previous campaigns on the same packages. For reference only — actual results may vary.</div>
+
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;">
+    <div style="background:var(--dark);padding:14px 24px;">
+      <span style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-l);">Sample Distribution Reports · Provided by PR Newswire</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:11px;font-weight:600;color:var(--dark);border-right:1px solid var(--border);">APAC English Only</div>
+        <div style="padding:14px 20px;font-size:11px;color:var(--text);">
+          <a href="https://app2.prnasia.com/vr-ui/email?redirect=a1.7d5e8c1339f98a909d0a553ce0a922f3.1946003bb141628db0151c2196f81f1d88f29d8712c6da4a9e0c6e5f80854285f6810360028ebe77b6b76aec74a46196d2336abeb332d083d4d2ec8edbe7fc6b8faf81cbf78b57a7af179f7f3cf82412dfc7b95d1762f22318df006cabd3821724e98f9a388543f8886cbf300882b752.1781913600" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none;">↗ View sample report — APAC English Only</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:11px;font-weight:600;color:var(--dark);border-right:1px solid var(--border);">APAC + Europe English Only</div>
+        <div style="padding:14px 20px;font-size:11px;color:var(--text);">
+          <a href="https://app2.prnasia.com/vr-ui/email?redirect=a1.8e1222f19d82ebf0fe0d0915847d3ebf.f504f42450a6e7341f82d3ba6483ee6eb286dd94dd3896358f52cefc972de6e4662d644c436f726a0936c063f51f164755de75cec65c01e659e8392463bae4789b01ca4c05356cb902a061e64701110304c0b76d479f61142a24d61b948f88f68388070042c151ad6b743119db3e3e29.1781913600" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none;">↗ View sample report — APAC + Europe English Only</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:180px 1fr;">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:11px;font-weight:600;color:var(--dark);border-right:1px solid var(--border);">Australia</div>
+        <div style="padding:14px 20px;font-size:11px;color:var(--text);">
+          <a href="https://app2.prnasia.com/vr-ui/email?redirect=a1.3e81590c4815055d2fd61dc87ab4714c.e8166bdadade3a9a41c511ad8eba0db678787cc04a92851e9beb6c9bd1a799b9c9736aa1d85f633c0814ac3fd171dcdf80f5e5ab84269972eee49c7d283f2136ae27b059cc04f39c921b0ceba50581c61817a7588cf10bce9aad1a3a64dc6335136ad94aee03892f791db39eedaf2d94.1781913600" target="_blank" style="color:var(--teal);font-weight:600;text-decoration:none;">↗ View sample report — Australia</a>
+        </div>
+      </div>
+    </div>
+    <div style="padding:10px 20px;background:#FFF8E1;border-top:1px solid rgba(200,140,0,.15);font-size:10px;color:#6B4400;">
+      ⚠ KPI figures are for reference only and not included in the formal contract — results may vary by release content and timing.
+    </div>
+  </div>
+
+  <div id="s-notes"></div>
+  <!-- ── NOTES ── -->
+  <div class="eyebrow">Submission Details</div>
+  <div class="sec-h">Notes & Process</div>
+  <div class="sec-sub" style="margin-bottom:16px">From PR Newswire proposal — applies to both options.</div>
+
+  <div class="notes-section">
+    <div class="notes-hdr">General Notes</div>
+    <div class="notes-body">
+      <div class="note-row">
+        <div class="note-label">Translation</div>
+        <div class="note-val">Service includes <strong>FREE translation</strong> to available local languages.</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">Report</div>
+        <div class="note-val">Complimentary report available <strong>2 hours after release</strong>. Translations take 1–2 days after English version is confirmed.</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">Submission Process</div>
+        <div class="note-val">Takes <strong>2–3 hours to process</strong>. Once released and published, content cannot be taken down or edited from other media websites.</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">KPI</div>
+        <div class="note-val"><strong>Option 1:</strong> Min. 60 links (APAC) · <strong>Option 2:</strong> ~15 links (AU) + ~20 links (EU) · <strong>Option 3:</strong> Min. 60 links (APAC) + ~20 links (EU)</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">Headlines</div>
+        <div class="note-val">Under <strong>110 characters</strong> — 10–15 words recommended.</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">Hyperlinks</div>
+        <div class="note-val">Unlimited allowed, but <strong>limit to 2–3 links</strong> recommended.</div>
+      </div>
+      <div class="note-row">
+        <div class="note-label">Account Registration</div>
+        <div class="note-val"><a href="https://portal.prnasia.com/accountregistration" target="_blank">https://portal.prnasia.com/accountregistration</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="s-content"></div>
+  <!-- ── NOTE FOR CONTENT TEAM ── -->
+  <div class="eyebrow">Note for Content Team</div>
+  <div class="sec-h">Press Release Format Requirement</div>
+  <div class="sec-sub" style="margin-bottom:16px">Please read before drafting the press release.</div>
+
+  <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;">
+    <div style="background:var(--dark);padding:14px 24px;">
+      <span style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);">Note for Content Team — Press Release Requirements</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0;">
+
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Format Required</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          PR Newswire requires a <strong>news announcement format</strong> — not thought leadership or opinion. Twist only the <strong>headline and first paragraph</strong> into announcement format. The intellectual content inside remains unchanged.<br>
+          <span style="display:inline-block;margin-top:8px;background:#E8F5E9;border:1px solid rgba(42,122,58,.2);border-radius:6px;padding:7px 12px;font-size:11px;color:#1A5A28;">
+            ✅ Example: <em>"Orient Software releases whitepaper on why legacy modernisation fails"</em>
+          </span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Length</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          <strong>400–600 words recommended.</strong> APAC English Only is flat fee (no extra charge). Australia and Europe English Only charge per 100 words above 400 — target 500w to control cost.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Headline</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          Under <strong>110 characters</strong> · 10–15 words recommended. Must lead with the news hook, not the company name.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Category at Submit</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          Select <strong>Technology / IT</strong> — ensures release is prioritised to tech wire outlets.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--border);">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Leadership Quote</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          One quote only. State the insight directly, then attribute it. <strong>Do not use:</strong> <em>"We are excited/delighted to announce"</em> — write for a CTO who will close the tab if it sounds like a pitch.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:180px 1fr;">
+        <div style="padding:14px 20px;background:#F7F4EF;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dark);border-right:1px solid var(--border);">Do NOT Include</div>
+        <div style="padding:14px 20px;font-size:12px;color:var(--text);line-height:1.75;">
+          Pricing · 2027 internal targets · Case studies not yet formally published · Hyperlinks: limit to 2–3 links max.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="s-payment"></div>
+  <!-- ── PAYMENT ── -->
+  <div class="eyebrow">Payment</div>
+  <div class="sec-h">Payment Terms</div>
+  <div class="sec-sub" style="margin-bottom:16px">US Dollar only. Prices are NET and exclude VAT or any local taxes.</div>
+
+  <div class="payment-grid">
+    <div class="pay-card">
+      <div class="pay-label">Payment Options</div>
+      <div class="pay-val">
+        <strong>Bank Transfer</strong> — to PR Newswire Asia's Bank Account (Bank of America, Hong Kong Branch)<br><br>
+        <strong>Card</strong> — Visa / Mastercard via Stripe
+      </div>
+    </div>
+    <div class="pay-card">
+      <div class="pay-label">Bank Transfer Details</div>
+      <div class="pay-val">
+        Bank of America N.A., Hong Kong Branch<br>
+        52/F, Cheung Kong Center, 2 Queen's Road, Central, HK<br>
+        <span class="account-no">
+          Account: PR Newswire Asia Limited<br>
+          A/C No: 72147-023 (USD)<br>
+          Bank: 055 · Branch: 757<br>
+          Swift: BOFAHKHXXXX
+        </span>
+        <br><span style="font-size:10px;color:var(--muted);margin-top:6px;display:block;">All local bank charges to be borne by Payer.</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#FFF8E1;border:1px solid rgba(200,140,0,.25);border-left:3px solid var(--warn, #E8A020);border-radius:0 10px 10px 0;padding:14px 20px;margin-bottom:32px;font-size:12px;color:#5A4000;line-height:1.8;">
+    <strong style="display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">⚠ Additional Charges — Please Note</strong>
+    Regardless of payment method chosen, additional fees may apply on top of the PR Newswire invoice amount:<br>
+    · <strong>Card payment (Visa/Mastercard):</strong> foreign currency transaction fee charged by Orient's card issuer<br>
+    · <strong>Bank transfer:</strong> international wire transfer fees as per Orient's bank standard rates<br><br>
+    These fees are <strong>not charged by PR Newswire</strong> — they are imposed by the bank or card used by Orient. The exact amount depends on which card or bank account is used for payment.
+  </div>
+
+  <div id="s-footer"></div>
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div>PR Newswire APAC · <a href="mailto:apaccs@cision.com">apaccs@cision.com</a> · <a href="https://www.prnewswire.com/apac" target="_blank">www.prnewswire.com/apac</a> · <a href="https://www.cision.asia" target="_blank">www.cision.asia</a></div>
+    <div style="margin-top:6px;">All prices from PR Newswire Asia Pacific 2026 Pricing Guide (USD) · Effective January 1, 2026 · All rates subject to change at the discretion of PR Newswire.</div>
+    <div style="margin-top:6px;color:#AAAAAA;">Prepared by Orient Software SEO Team · Internal use only</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+(function(){
+  const sections = ['s-overview','s-brief','s-options','s-pricing','s-kpi','s-samples','s-notes','s-content','s-payment'];
+  const links = document.querySelectorAll('.toc-link');
+  function setActive(){
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && window.scrollY >= el.getBoundingClientRect().top + window.scrollY - 100) current = id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+    });
+  }
+  window.addEventListener('scroll', setActive);
+  setActive();
+})();
+</script>
+</body>
+</html>
