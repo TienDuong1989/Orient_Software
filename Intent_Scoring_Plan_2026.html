@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Intent Scoring Plan · GTM 2026</title>
+<style>
+:root{
+  --navy:#1B2D4F;--teal:#0D7377;--teal2:#14A085;--teal3:#E6F4F4;
+  --gold:#B45309;--gold2:#FFFBEB;
+  --red:#C04040;--red2:#FAE8E8;
+  --green:#2D8B6B;--green2:#E8F5F0;
+  --purple:#6B4FA0;--purple2:#F3EEFF;
+  --orange:#C05A10;--orange2:#FFF3E8;
+  --ink:#1C1C1E;--ink2:#3C3C3E;--ink3:#6B7280;
+  --border:#E5E7EB;--border2:#D1D5DB;
+  --bg:#FAFAF9;--bg2:#F4F4F2;--white:#FFFFFF;
+  --r:10px;--r2:6px;
+  --font:Arial,Helvetica,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.6}
+
+/* TOPBAR */
+.topbar{height:52px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 36px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.06)}
+.tb-left{display:flex;align-items:center;gap:14px}
+.tb-sep{width:1px;height:20px;background:rgba(255,255,255,.12)}
+.tb-title{font-size:13px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.01em}
+.tb-tag{font-size:10px;color:rgba(255,255,255,.28);letter-spacing:.07em;text-transform:uppercase}
+.tb-right{font-size:11px;color:rgba(255,255,255,.22);letter-spacing:.02em}
+
+/* HERO */
+.hero{background:var(--navy);padding:40px 40px 32px;border-bottom:3px solid var(--teal)}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal2);padding:4px 12px;border:1px solid rgba(13,115,119,.4);border-radius:20px;background:rgba(13,115,119,.12)}
+.hero-date{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:.03em}
+.hero h1{font-size:28px;font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.02em;margin-bottom:7px}
+.hero h1 span{color:var(--teal2)}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.42);line-height:1.65;max-width:580px;margin-bottom:22px}
+.hero-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.08);padding-top:18px;flex-wrap:wrap}
+.hstat{padding-right:28px;border-right:1px solid rgba(255,255,255,.08);margin-right:28px;margin-bottom:6px}
+.hstat:last-child{border-right:none;margin-right:0}
+.hstat-val{font-size:18px;font-weight:700;color:#fff}
+.hstat-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.05em;text-transform:uppercase;margin-top:1px}
+
+/* TAB NAV */
+.tab-nav-wrap{background:var(--white);border-bottom:2px solid var(--border);position:sticky;top:52px;z-index:95;display:flex;padding:0 36px;overflow-x:auto}
+.tab-nav-wrap::-webkit-scrollbar{display:none}
+.tab-btn{padding:13px 22px;font-size:13px;font-weight:600;color:var(--ink3);border:none;border-bottom:3px solid transparent;margin-bottom:-2px;background:none;cursor:pointer;white-space:nowrap;font-family:var(--font);letter-spacing:.01em;transition:color .15s,background .15s;display:flex;align-items:center;gap:7px}
+.tab-btn:hover{color:var(--ink2);background:var(--bg2)}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:700}
+.tab-num{font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;background:var(--border);color:var(--ink3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.tab-btn.active .tab-num{background:var(--teal);color:#fff}
+
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* MAIN */
+.main{padding:32px 40px 80px;max-width:1140px;margin:0 auto}
+
+/* SECTION HEADER */
+.sec-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.sec-num{font-size:10px;font-weight:700;color:var(--teal);letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;background:var(--teal3);border-radius:var(--r2);white-space:nowrap;margin-top:3px;flex-shrink:0}
+.sec-title{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.01em;margin-bottom:3px}
+.sec-sub{font-size:13px;color:var(--ink3);font-style:italic}
+
+/* OVERVIEW LAYOUT - sidebar + main */
+.ov-layout{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 104px)}
+.ov-sidebar{background:var(--white);border-right:1px solid var(--border);position:sticky;top:104px;height:calc(100vh - 104px);overflow-y:auto;padding:24px 0}
+.tab-panel:not(.active) .ov-sidebar{position:static;display:none}
+.ov-sidebar::-webkit-scrollbar{width:3px}
+.ov-sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:8px 18px;font-size:13px;color:var(--ink3);text-decoration:none;transition:all .15s;border-left:2px solid transparent;cursor:pointer}
+.nav-item:hover{background:var(--bg2);color:var(--ink)}
+.nav-item.active{background:var(--teal3);color:var(--teal);border-left-color:var(--teal);font-weight:600}
+.nav-num{font-size:10px;font-weight:700;color:var(--ink3);opacity:.45;width:16px;flex-shrink:0}
+.nav-item.active .nav-num{color:var(--teal);opacity:.65}
+.ov-main{padding:36px 52px 80px;max-width:1100px}
+
+/* INFO NOTE - compact */
+.info-note{background:var(--teal3);border:1px solid rgba(13,115,119,.18);border-radius:var(--r);padding:9px 14px;margin-bottom:16px;font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:baseline}
+.info-note strong{color:var(--teal);flex-shrink:0;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+
+/* TABLE WRAPPER */
+.tbl-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.tbl-toolbar{padding:9px 14px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.tbl-toolbar-left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tbl-toolbar-title{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--navy)}
+.tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#funnel-tbl{min-width:1500px}
+#funnel-tbl th:nth-child(1){min-width:110px}
+#funnel-tbl th:nth-child(2){min-width:120px}
+#funnel-tbl th:nth-child(3){min-width:160px}
+#funnel-tbl th:nth-child(8){min-width:200px}
+#funnel-tbl th:nth-child(13){min-width:180px}
+#scoring-tbl{min-width:900px}
+#li-tbl{min-width:900px}
+#li-tbl td:nth-child(1),#li-tbl td:nth-child(2){white-space:nowrap;min-width:150px}
+
+/* TABLE BASE */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl thead tr{background:var(--navy)}
+.tbl thead th{padding:9px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.55);white-space:nowrap}
+.tbl tbody tr{border-bottom:1px solid var(--border)}
+.tbl tbody tr:last-child{border-bottom:none}
+.tbl tbody tr:hover{background:var(--bg2)}
+.tbl td{padding:10px 14px;vertical-align:top;line-height:1.55;font-size:13px;color:var(--ink2)}
+td.agenda-num{font-weight:700;color:var(--teal)!important;white-space:nowrap;font-size:13px}
+td.agenda-what{color:var(--ink2);font-size:13px}
+.note-card{background:var(--teal3);border:1px solid rgba(13,115,119,.18);border-radius:var(--r);padding:11px 15px;margin-top:10px;font-size:13px;color:var(--ink2);display:flex;gap:10px;align-items:flex-start}
+.note-card strong{color:var(--teal);white-space:nowrap}
+
+/* HIDDEN COLUMNS (GTM detail) */
+.col-gtm{display:none}
+.show-gtm .col-gtm{display:table-cell}
+
+/* TOGGLE DETAIL BUTTON */
+.toggle-detail{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);background:var(--white);cursor:pointer;color:var(--ink3);font-family:var(--font);transition:all .15s;display:flex;align-items:center;gap:4px}
+.toggle-detail.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.toggle-detail:hover:not(.on){background:var(--bg2)}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:5px;flex-wrap:wrap}
+.flt-btn{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);background:var(--white);cursor:pointer;transition:all .15s;color:var(--ink2);font-family:var(--font);white-space:nowrap}
+.flt-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.flt-btn:hover:not(.active){background:var(--bg2)}
+
+/* LEGEND ROW */
+.legend-row{display:flex;gap:16px;flex-wrap:wrap;padding:8px 14px;border-top:1px solid var(--border);background:var(--bg2);font-size:11px;color:var(--ink3);align-items:center}
+.leg{display:flex;align-items:center;gap:5px;font-weight:600}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* CELL TYPES */
+.td-bold{font-weight:700;color:var(--navy)!important;white-space:nowrap}
+.td-mono{font-size:11px;font-family:monospace;background:var(--bg2);padding:2px 6px;border-radius:4px;color:var(--teal);white-space:nowrap;display:inline-block}
+.td-mono-red{font-size:11px;font-family:monospace;background:#FEF2F2;padding:2px 6px;border-radius:4px;color:var(--red);white-space:nowrap;display:inline-block}
+.sec-divider{border:none;border-top:1px solid var(--border);margin:8px 0}
+
+/* STRATEGY THEME CLASSES */
+.agenda-num{font-weight:700;color:var(--teal);white-space:nowrap;font-size:13px}
+.agenda-what{color:var(--ink2);font-size:13px}
+.mandate-box{background:var(--navy);border-radius:var(--r);padding:13px 17px;margin-top:12px;display:flex;align-items:flex-start;gap:12px}
+.mandate-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal2);white-space:nowrap;margin-top:2px;flex-shrink:0}
+.mandate-text{font-size:13px;color:rgba(255,255,255,.78);line-height:1.6}
+.tradeoff{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.to-hdr{display:flex;align-items:center;gap:11px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.to-num{width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.to-title{font-size:13px;font-weight:700;color:var(--navy)}
+.to-body{padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.65;border-bottom:1px solid var(--border)}
+.to-cols{display:grid;grid-template-columns:1fr 1fr}
+.to-col{padding:12px 16px}
+.to-col:first-child{border-right:1px solid var(--border)}
+.to-col-label{font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px}
+.sacrifice .to-col-label{color:var(--teal)}
+.gain .to-col-label{color:var(--teal)}
+.to-col-text{font-size:13px;color:var(--ink2);line-height:1.6}
+.commits{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+.commit-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--teal)}
+.commit-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.commit-text{font-size:12px;color:var(--ink3);line-height:1.55}
+.kpi-name{font-weight:700;color:var(--navy);font-size:13px}
+.kpi-target{font-weight:700;color:var(--teal);font-size:13px}
+.kpi-note{font-size:12px;color:var(--ink3);line-height:1.5}
+.phase-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.phase-hdr{display:flex;align-items:center;gap:10px;padding:11px 16px;background:var(--navy)}
+.phase-pill{font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0}
+.p1{background:rgba(13,115,119,.3);color:#5ECEC8}
+.p2{background:rgba(180,83,9,.3);color:#FBB040}
+.p3{background:rgba(130,100,180,.3);color:#C4A8E8}
+.phase-title{font-size:13px;font-weight:700;color:#fff}
+.phase-weeks{font-size:12px;color:rgba(255,255,255,.35);margin-left:auto;white-space:nowrap}
+.phase-body{padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.6;border-bottom:1px solid var(--border)}
+.phase-gate{padding:9px 16px;background:var(--teal3);display:flex;align-items:center;gap:8px;font-size:12px}
+.gate-label{font-weight:700;color:var(--teal);font-size:9px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.gate-text{color:var(--ink2)}
+.gate-when{font-weight:700;color:var(--navy);white-space:nowrap;font-size:13px}
+.risk-name{font-weight:700;color:var(--navy);font-size:13px}
+.risk-sub{font-weight:400;color:var(--ink3);font-size:12px;display:block;margin-top:2px}
+.impact-high{display:inline-flex;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#FECACA;color:#991B1B;white-space:nowrap}
+.impact-med{display:inline-flex;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;background:var(--gold2);color:var(--gold);white-space:nowrap}
+.risk-mit{font-size:13px;color:var(--ink2);line-height:1.55}
+.diagram-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.diagram-hdr{padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+.section{margin-bottom:40px;scroll-margin-top:72px}
+.divider{border:none;border-top:1px solid var(--border);margin:28px 0}
+.td-note{font-size:11px;color:var(--ink3);font-style:italic}
+
+/* STAGE BADGES */
+.stage-anon{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#1D4ED8;white-space:nowrap}
+.stage-content{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:#F3EEFF;color:#6B4FA0;white-space:nowrap}
+.stage-hi{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:var(--orange2);color:var(--orange);white-space:nowrap}
+.stage-conv{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green);white-space:nowrap}
+
+/* CAMPAIGN TAG */
+.ctag-generic{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;background:#F1F5F9;color:#94A3B8;letter-spacing:.03em}
+.ctag-campaign{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;background:#FEF3C7;color:#92400E;letter-spacing:.03em}
+
+/* GROUP HEADER - campaign variant */
+.tbl-group-campaign td{background:var(--teal3)!important;color:var(--teal)!important;border-left:3px solid var(--gold)!important}
+
+/* REPEAT COLUMN HEADER inside tbody */
+.tbl-repeat-hdr td{background:var(--navy);color:rgba(255,255,255,.55);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;white-space:nowrap}
+
+/* SEGMENT BADGES */
+.seg-cold{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:#F1F5F9;color:#475569;white-space:nowrap}
+.seg-warm{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:#FFFBEB;color:#B45309;white-space:nowrap}
+.seg-hot{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:var(--red2);color:var(--red);white-space:nowrap}
+.seg-hi{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:var(--purple2);color:var(--purple);white-space:nowrap}
+.seg-lead{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green);white-space:nowrap}
+
+/* SCORE CHIP - wider to fit "100" */
+.score-chip{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:24px;padding:0 6px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap}
+.score-low{background:#F1F5F9;color:#475569}
+.score-med{background:#FFFBEB;color:#B45309}
+.score-high{background:var(--orange2);color:var(--orange)}
+.score-vhigh{background:var(--red2);color:var(--red)}
+.score-max{background:var(--green2);color:var(--green)}
+
+/* CAP NOTE */
+.cap-note{font-size:10px;color:var(--ink3);display:block;margin-top:2px;font-style:italic}
+.cap-once{font-size:10px;color:var(--teal);display:block;margin-top:2px;font-style:italic;font-weight:600}
+
+/* PUSH BADGE */
+.push-yes{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--teal)}
+.push-no{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--ink3)}
+
+/* ADS BADGES */
+.ads-educ{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#1D4ED8;white-space:nowrap}
+.ads-case{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#F5F3FF;color:#6D28D9;white-space:nowrap}
+.ads-sol{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--gold2);color:var(--gold);white-space:nowrap}
+.ads-conv{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--red2);color:var(--red);white-space:nowrap}
+.ads-excl{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#F1F5F9;color:#94A3B8;white-space:nowrap}
+.ads-boost{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#FFF7ED;color:#C2410C;white-space:nowrap}
+.ads-sc{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#F0FDF4;color:#166534;white-space:nowrap}
+.ads-retarget{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--purple2);color:var(--purple);white-space:nowrap}
+.ads-retarget-delay{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#FDF2F8;color:#9D174D;white-space:nowrap}
+
+/* OBJECTIVE BADGES */
+.obj-engage{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#1D4ED8;white-space:nowrap}
+.obj-traffic{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--gold2);color:var(--gold);white-space:nowrap}
+.obj-conv{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--red2);color:var(--red);white-space:nowrap}
+.obj-measure{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green);white-space:nowrap}
+
+/* DATA LEVEL */
+.dl-anon{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#F1F5F9;color:#64748B;white-space:nowrap}
+.dl-partial{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--gold2);color:var(--gold);white-space:nowrap}
+.dl-email{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--teal3);color:var(--teal);white-space:nowrap}
+.dl-full{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green);white-space:nowrap}
+
+/* SOURCE BADGE */
+.src-track{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#2563EB}
+.src-system{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--teal3);color:var(--teal)}
+.src-li{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#0A66C2}
+.src-crm{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green)}
+.src-ts{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--purple2);color:var(--purple)}
+
+/* AUDIENCE TYPE */
+.at-web{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#EFF6FF;color:#1D4ED8}
+.at-websys{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--purple2);color:var(--purple)}
+.at-eng{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:#FFF7ED;color:#C2410C}
+.at-contact{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--green2);color:var(--green)}
+.at-crm{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;background:var(--gold2);color:var(--gold)}
+
+/* ICP */
+.icp-yes{font-size:12px;color:var(--teal);font-weight:700}
+.icp-no{font-size:12px;color:var(--ink3)}
+
+/* PURPOSE */
+.purp{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.purp-nurture{background:#EFF6FF;color:#1D4ED8}
+.purp-consid{background:var(--gold2);color:var(--gold)}
+.purp-push{background:var(--orange2);color:var(--orange)}
+.purp-retarget{background:var(--red2);color:var(--red)}
+.purp-close{background:var(--purple2);color:var(--purple)}
+.purp-warmup{background:var(--teal3);color:var(--teal)}
+.purp-review{background:#F1F5F9;color:#475569}
+.purp-sales{background:var(--green2);color:var(--green)}
+.purp-pipeline{background:var(--green2);color:#166534}
+.purp-retention{background:var(--navy);color:#fff}
+
+/* SYSTEM ACTION CELL */
+.sys-none{font-size:12px;color:var(--ink3)}
+.sys-action{font-size:12px;color:var(--teal);font-weight:600}
+.sys-crm{font-size:12px;color:var(--green);font-weight:700}
+
+/* SECTION DIVIDER inside table */
+.tbl .tbl-group-hdr td{background:var(--teal3);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--teal)!important;padding:7px 14px;border-bottom:1px solid rgba(13,115,119,.15);border-left:none}
+.tbl .tbl-group-hdr-l2 td{background:var(--teal3);font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)!important;padding:5px 14px;border-bottom:1px solid rgba(13,115,119,.1);border-left:none;opacity:.75}
+
+/* FOOTER */
+.footer{background:var(--navy);padding:16px 40px;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.03em}
+
+@media(max-width:768px){
+  .topbar,.hero,.main,.footer{padding-left:20px;padding-right:20px}
+  .tab-nav-wrap{padding:0 20px}
+  .hero h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-left">
+    <span class="tb-title">Intent Scoring Plan</span>
+    <div class="tb-sep"></div>
+    <span class="tb-tag">GTM · 2026</span>
+  </div>
+  <span class="tb-right">Private · Digital Marketing</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="hero-tag">Intent Scoring · GTM Plan</span>
+    <span class="hero-date">2026 · May – August</span>
+  </div>
+  <h1>Intent Scoring <span>Plan</span></h1>
+  <p class="hero-sub">Convert user behavior into measurable intent data for marketing, automation, and sales. From anonymous visit to qualified lead - fully mapped, scored, and activated.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val">13</div><div class="hstat-label">Intent Events</div></div>
+    <div class="hstat"><div class="hstat-val">4</div><div class="hstat-label">Audience Segments</div></div>
+    <div class="hstat"><div class="hstat-val">100</div><div class="hstat-label">Max Score</div></div>
+    <div class="hstat"><div class="hstat-val">2</div><div class="hstat-label">Channels Activated</div></div>
+    <div class="hstat"><div class="hstat-val">7d</div><div class="hstat-label">Score Window</div></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav-wrap">
+  <button class="tab-btn active" onclick="switchTab('overview',this)">
+    <span class="tab-num">1</span> Overview
+  </button>
+  <button class="tab-btn" onclick="switchTab('funnel',this)">
+    <span class="tab-num">2</span> User Intent Funnel
+  </button>
+  <button class="tab-btn" onclick="switchTab('scoring',this)">
+    <span class="tab-num">3</span> Intent Scoring
+  </button>
+  <button class="tab-btn" onclick="switchTab('linkedin',this)">
+    <span class="tab-num">4</span> LinkedIn Audience Segment
+  </button>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 1 - OVERVIEW
+══════════════════════════════ -->
+
+<div class="tab-panel active" id="panel-overview">
+  <div class="ov-layout">
+
+    <!-- SIDEBAR NAV -->
+    <nav class="ov-sidebar">
+      <a class="nav-item active" href="#agenda" onclick="ovSetActive(this)"><span class="nav-num">-</span>Agenda</a>
+      <div style="height:1px;background:var(--border);margin:8px 18px"></div>
+      <a class="nav-item" href="#s01" onclick="ovSetActive(this)"><span class="nav-num">01</span>Situation</a>
+      <a class="nav-item" href="#s02" onclick="ovSetActive(this)"><span class="nav-num">02</span>Strategic Choices</a>
+      <a class="nav-item" href="#s03" onclick="ovSetActive(this)"><span class="nav-num">03</span>The System</a>
+      <a class="nav-item" href="#s04" onclick="ovSetActive(this)"><span class="nav-num">04</span>Success Metrics</a>
+      <a class="nav-item" href="#s05" onclick="ovSetActive(this)"><span class="nav-num">05</span>Roadmap &amp; Gates</a>
+      <a class="nav-item" href="#s06" onclick="ovSetActive(this)"><span class="nav-num">06</span>Risk &amp; Mitigation</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="ov-main">
+
+    <!-- AGENDA -->
+    <section class="section" id="agenda">
+      <div class="sec-header">
+        <span class="sec-num">Agenda</span>
+        <div>
+          <div class="sec-title">What this document covers</div>
+          <div class="sec-sub">Est. read: 5 minutes</div>
+        </div>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Section</th><th>What you will find</th></tr></thead>
+        <tbody>
+          <tr><td class="agenda-num">01 · Situation</td><td class="agenda-what">Why this system exists - what problem it solves for Digital</td></tr>
+          <tr><td class="agenda-num">02 · Strategic Choices</td><td class="agenda-what">Three deliberate decisions that shape how this system is built and run</td></tr>
+          <tr><td class="agenda-num">03 · The System</td><td class="agenda-what">End-to-end tracking flow + Intent Score User Classification diagram</td></tr>
+          <tr><td class="agenda-num">04 · Success Metrics</td><td class="agenda-what">KPIs measuring tracking coverage, audience size, and retarget effectiveness</td></tr>
+          <tr><td class="agenda-num">05 · Roadmap &amp; Gates</td><td class="agenda-what">Four phases May-August - Phase 0 completed ✅</td></tr>
+          <tr><td class="agenda-num">06 · Risk &amp; Mitigation</td><td class="agenda-what">Three managed risks - each with a mitigation trigger</td></tr>
+        </tbody>
+      </table>
+      <div class="note-card">
+        <strong>Note</strong>
+        <span>Tab 2, 3, 4 contain the full technical detail - event spec, scoring model, and LinkedIn audience setup. This tab is the plan overview for alignment.</span>
+      </div>
+
+    <!-- EXECUTIVE SUMMARY -->
+    </section>
+    <section class="section" id="exec">
+      <div class="sec-header">
+        <span class="sec-num" style="background:var(--navy);color:#fff">TL;DR</span>
+        <div>
+          <div class="sec-title">Executive Summary</div>
+          <div class="sec-sub">Read this. Skip the rest if needed.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div style="background:var(--teal3);border:1px solid rgba(13,115,119,.2);border-radius:var(--r);padding:14px 16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">The Problem</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.65">Digital has no behavioral data on website visitors. Without intent signals, LinkedIn ads reach broad audiences - wasting spend on users who have not shown any intent.</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Why Build This</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.65">Score every website visitor by intent - before they submit a form. Build audiences from real behavioral signals. Retarget the right person with the right ad - expand to other channels in Q3+.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">How It Works</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.65">
+            <div style="margin-bottom:6px"><strong style="color:var(--navy)">May-Jun</strong> - 13 events live · Score 1-85 · Build 4 LinkedIn audiences</div>
+            <div style="margin-bottom:6px"><strong style="color:var(--navy)">Jul</strong> - LinkedIn Paid activated · Retarget only · No cold ads</div>
+            <div><strong style="color:var(--navy)">Aug</strong> - Optimize · Baseline data · Q3 channel expansion plan</div>
+          </div>
+        </div>
+        <div style="background:var(--teal3);border:1px solid rgba(13,115,119,.2);border-radius:var(--r);padding:14px 16px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">What Success Looks Like</div>
+          <div style="font-size:13px;color:var(--ink2);line-height:1.65">
+            <div style="margin-bottom:5px">13/13 events live · end May</div>
+            <div style="margin-bottom:5px">4 segments ≥300 members · before Jul W1</div>
+            <div>LinkedIn Paid activated Jul · CTR · CPL · CVR baseline Aug</div>
+          </div>
+        </div>
+      </div>
+
+    <div class="divider"></div>
+
+    <!-- 01. SITUATION -->
+    </section>
+    <section class="section" id="s01">
+      <div class="sec-header">
+        <span class="sec-num">01</span>
+        <div>
+          <div class="sec-title">The Situation</div>
+          <div class="sec-sub">The mandate from Digital - and why this system is needed now.</div>
+        </div>
+      </div>
+      <table class="tbl" style="margin-bottom:14px">
+        <thead><tr><th>What we have been asked to solve</th><th>How Digital is responding</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--ink2)">No behavioral data - can't identify intent before form submit</td>
+            <td style="font-weight:600;color:var(--navy)">13 GTM events → score every user by intent in real time</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink2)">LinkedIn ads targeting broad, low-intent audiences</td>
+            <td style="font-weight:600;color:var(--navy)">Event-based audiences - retarget proven intent signals only</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink2)">No reusable audience data across campaigns or channels</td>
+            <td style="font-weight:600;color:var(--navy)">Event tracking built once - same dataLayer feeds all channels. No new dev work per channel.</td>
+          </tr>
+          <tr>
+            <td style="color:var(--ink2)">AI Native Campaign traffic arriving without tracking in place</td>
+            <td style="font-weight:600;color:var(--navy)">Pixel + events confirmed live before any campaign traffic arrives</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mandate-box">
+        <div class="mandate-label">Build this. Own it.</div>
+        <div class="mandate-text">Build the system. Own the output. Deliver the data foundation to expand to other channels in Q3.</div>
+      </div>
+    
+
+    <!-- 02. STRATEGIC CHOICES -->
+
+    </section>
+    <section class="section" id="s02">
+      <div class="sec-header">
+        <span class="sec-num">02</span>
+        <div>
+          <div class="sec-title">Strategic Choices</div>
+          <div class="sec-sub">Three deliberate decisions that shape how this system is built and run.</div>
+        </div>
+      </div>
+
+      <div class="tradeoff">
+        <div class="to-hdr"><div class="to-num">①</div><div class="to-title">Track behavior before form submit - not just leads</div></div>
+        <div class="to-body">High-intent visitors often leave before submitting a form - still researching, still evaluating. Without behavioral tracking, they disappear unidentified. This system captures their intent signals and brings them back through retarget campaigns across any ad channel.</div>
+        <div class="to-cols">
+          <div class="to-col gain"><div class="to-col-label">Why this matters</div><div class="to-col-text">When a visitor later submits a form, we know exactly which intent group they belong to - what pages they visited, how deep they engaged, and which campaign brought them back. This makes retarget optimization possible, not just trackable.</div></div>
+          <div class="to-col gain"><div class="to-col-label">How it works</div><div class="to-col-text">13 events via GTM + dev. Score 1-85 before submit. Audiences built from real behavioral signals - starting with LinkedIn, reusable across Google, Email, and other ad channels in Q3+.</div></div>
+        </div>
+      </div>
+
+      <div class="tradeoff">
+        <div class="to-hdr"><div class="to-num">②</div><div class="to-title">Organic first - Paid activates only after audiences are validated</div></div>
+        <div class="to-body">Apr-Jun organic only. LinkedIn Paid activates Jul - after audiences reach 300+ members. Paid amplifies what works, not what we hope will work.</div>
+        <div class="to-cols">
+          <div class="to-col gain"><div class="to-col-label">Why this matters</div><div class="to-col-text">Running paid ads to unvalidated audiences wastes budget. Organic traffic in Apr-Jun builds real intent signals - Paid in Jul retargets only proven-intent users.</div></div>
+          <div class="to-col gain"><div class="to-col-label">How it works</div><div class="to-col-text">Gate 2: ≥300 members per segment before Paid activates. Every LinkedIn ad impression in Jul goes to a user who has already shown real intent on the website.</div></div>
+        </div>
+      </div>
+
+      <div class="tradeoff">
+        <div class="to-hdr"><div class="to-num">③</div><div class="to-title">LinkedIn now - event architecture built for multi-channel expansion</div></div>
+        <div class="to-body">Event tracking built once - feeds all channels simultaneously. Adding a new channel is configuration, not development.</div>
+        <div class="to-cols">
+          <div class="to-col gain"><div class="to-col-label">Why this matters</div><div class="to-col-text">One event fires once and flows into GA4, LinkedIn, Google Ads, and the scoring system at the same time. No duplicate setup. No inconsistent data between channels. No dev work when a new channel is added.</div></div>
+          <div class="to-col gain"><div class="to-col-label">How it works</div><div class="to-col-text">13 GTM events fire regardless of channel. Audience data stored in system. Q3+ expansion is configuration - not a rebuild.</div></div>
+        </div>
+      </div>
+    
+
+    <div class="divider"></div>
+
+    <!-- 03. THE SYSTEM -->
+    </section>
+    <section class="section" id="s03">
+      <div class="sec-header">
+        <span class="sec-num">03</span>
+        <div>
+          <div class="sec-title">The System</div>
+          <div class="sec-sub">One flow. Every component earns its place.</div>
+        </div>
+      </div>
+
+      <p class="sec-body">Every user who visits the site is tracked. Every behavioral event feeds the scoring model. Every scored user builds a LinkedIn audience. Every audience activates a retarget campaign - matched to their intent level.</p>
+
+      <!-- FLOW -->
+      <div class="diagram-wrap" style="margin-bottom:24px">
+        <div class="diagram-hdr">Behavioral Tracking Flow · End-to-End</div>
+        <div style="padding:28px 32px;display:flex;align-items:flex-start;gap:0">
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--bg2);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">🌐</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Traffic</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">SEO · Campaign LPs<br>LinkedIn Organic</div>
+          </div>
+          <div style="color:var(--border2);font-size:22px;flex-shrink:0;padding:0 4px;margin-top:14px">→</div>
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--teal3);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">⚡</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Event Tracking</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">GTM + Dev<br>13 events</div>
+          </div>
+          <div style="color:var(--border2);font-size:22px;flex-shrink:0;padding:0 4px;margin-top:14px">→</div>
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:#FFF3E8;border:2px solid #C2410C;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">📊</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Intent Scoring</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">Score 1–85<br>3 categories · 7d</div>
+          </div>
+          <div style="color:var(--border2);font-size:22px;flex-shrink:0;padding:0 4px;margin-top:14px">→</div>
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:#EDE9FE;border:2px solid #7C3AED;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">🎯</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Audience Build</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">Insight Tag<br>URL Audience<br>Email list</div>
+          </div>
+          <div style="color:var(--border2);font-size:22px;flex-shrink:0;padding:0 4px;margin-top:14px">→</div>
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--teal3);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">📣</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Retarget</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">Sponsored Content<br>Lead Gen Form<br>LinkedIn Paid Jul</div>
+          </div>
+          <div style="color:var(--border2);font-size:22px;flex-shrink:0;padding:0 4px;margin-top:14px">→</div>
+          <div style="flex:1;text-align:center;padding:0 10px">
+            <div style="width:52px;height:52px;border-radius:50%;background:var(--green2);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px">✅</div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px">Return & Convert</div>
+            <div style="font-size:11px;color:var(--ink3);line-height:1.6">Form submit<br>→ Lead Scoring<br>→ Sales</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTENT SCORE DIAGRAM -->
+      <div class="diagram-wrap">
+        <div class="diagram-hdr">Intent Score - User Classification · Score 1–85 before submit · 100 = New Lead in pipeline</div>
+        <div style="padding:24px 32px 20px;display:flex;gap:28px;align-items:flex-start">
+          <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+            <div style="width:100%;clip-path:polygon(2% 0,98% 0,100% 100%,0% 100%);background:linear-gradient(135deg,#94A3B8,#64748B);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;min-height:52px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;min-width:36px">1–10</span>
+                <div><div style="font-size:12px;font-weight:700;color:#fff">Aware</div><div style="font-size:11px;color:rgba(255,255,255,.75)">Scroll · Time on page</div></div>
+              </div>
+              <span style="font-size:11px;color:rgba(255,255,255,.65)">GA4 + Scoring only</span>
+            </div>
+            <div style="width:91%;margin:0 auto;clip-path:polygon(2% 0,98% 0,100% 100%,0% 100%);background:linear-gradient(135deg,#FCD34D,#D97706);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;min-height:56px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;min-width:36px">11–25</span>
+                <div><div style="font-size:12px;font-weight:700;color:#fff">Interested</div><div style="font-size:11px;color:rgba(255,255,255,.85)">Case study · Service page</div></div>
+              </div>
+              <span style="font-size:11px;color:rgba(255,255,255,.85)">Sponsored Content + ICP</span>
+            </div>
+            <div style="width:80%;margin:0 auto;clip-path:polygon(2% 0,98% 0,100% 100%,0% 100%);background:linear-gradient(135deg,#FB923C,#C2410C);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;min-height:60px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;min-width:36px">26–40</span>
+                <div><div style="font-size:12px;font-weight:700;color:#fff">Considering</div><div style="font-size:11px;color:rgba(255,255,255,.85)">Return visit · Blog CTA · Contact view</div></div>
+              </div>
+              <span style="font-size:11px;color:rgba(255,255,255,.85)">Lead Gen Form + ICP</span>
+            </div>
+            <div style="width:67%;margin:0 auto;clip-path:polygon(2% 0,98% 0,100% 100%,0% 100%);background:linear-gradient(135deg,#F87171,#DC2626);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;min-height:64px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;min-width:36px">41–60</span>
+                <div><div style="font-size:12px;font-weight:700;color:#fff">Intended</div><div style="font-size:11px;color:rgba(255,255,255,.85)">Start form · Drop · Whitepaper</div></div>
+              </div>
+              <span style="font-size:11px;color:rgba(255,255,255,.85)">Lead Gen Form + ICP</span>
+            </div>
+            <div style="width:60%;margin:0 auto;clip-path:polygon(2% 0,98% 0,100% 100%,0% 100%);background:linear-gradient(135deg,#A78BFA,#7C3AED);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;min-height:64px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;min-width:36px;white-space:nowrap">61–85</span>
+                <div><div style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap">High Intention</div><div style="font-size:11px;color:rgba(255,255,255,.85);white-space:nowrap">Step 2 view · Engaged · Full data</div></div>
+              </div>
+              <span style="font-size:11px;color:rgba(255,255,255,.85);white-space:nowrap;flex-shrink:0">Email list · Exact match</span>
+            </div>
+            <div style="width:52%;margin:0 auto;background:linear-gradient(135deg,#34D399,#059669);padding:14px 28px;display:flex;align-items:center;gap:16px;min-height:56px;border-radius:0 0 10px 10px">
+              <span style="font-size:15px;font-weight:800;color:#fff;font-family:monospace;white-space:nowrap">100</span>
+              <div>
+                <div style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap">New Lead · Exclude from ads</div>
+                <div style="font-size:11px;color:rgba(255,255,255,.85);white-space:nowrap">Form submit → scoring system</div>
+              </div>
+            </div>
+          </div>
+          <div style="width:200px;display:flex;flex-direction:column;gap:4px;padding-top:2px">
+            <div style="min-height:56px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #94A3B8"><div style="font-size:12px;color:var(--ink3);line-height:1.5"><span style="color:var(--navy);font-weight:600;display:block">Anonymous</span>Cookie only</div></div>
+            <div style="min-height:60px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #D97706"><div style="font-size:12px;color:var(--ink3);line-height:1.5"><span style="color:var(--navy);font-weight:600;display:block">Anonymous</span>Cookie + URL signal</div></div>
+            <div style="min-height:64px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #C2410C"><div style="font-size:12px;color:var(--ink3);line-height:1.5"><span style="color:var(--navy);font-weight:600;display:block">Anonymous</span>Cookie + behavior signal</div></div>
+            <div style="min-height:68px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #DC2626"><div style="font-size:12px;color:var(--ink3);line-height:1.5"><span style="color:var(--navy);font-weight:600;display:block">Email captured</span>Work email confirmed</div></div>
+            <div style="min-height:72px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #7C3AED"><div style="font-size:12px;color:var(--teal);line-height:1.6;font-weight:600"><span style="display:block;margin-bottom:2px">✅ Full Data</span><span style="font-weight:400;color:var(--ink3);font-size:11px">Name · Work Email · Company · Website · Description → exact LinkedIn match</span></div></div>
+            <div style="min-height:60px;display:flex;align-items:center;padding:6px 0 6px 14px;border-left:2px solid #059669"><div style="font-size:12px;color:var(--green);line-height:1.5;font-weight:600"><span style="display:block">In Pipeline</span><span style="font-weight:400;color:var(--ink3)">Qualified / Unqualified → Sales</span></div></div>
+        </div>
+      </div>
+      <div style="padding:11px 32px;background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;white-space:nowrap;overflow-x:auto">
+        <strong style="color:var(--navy);font-size:13px">Scoring formula:</strong>
+        <span style="font-size:13px;color:var(--ink2)">Content Read <strong style="color:var(--navy)">max 10</strong></span>
+        <span style="color:var(--border2);font-size:16px">+</span>
+        <span style="font-size:13px;color:var(--ink2)">Page Visit <strong style="color:var(--navy)">max 15</strong></span>
+        <span style="color:var(--border2);font-size:16px">+</span>
+        <span style="font-size:13px;color:var(--ink2)">Lead Intent <strong style="color:var(--navy)">max 60</strong> · highest only</span>
+        <span style="color:var(--border2);font-size:16px">=</span>
+        <strong style="color:var(--navy);font-size:13px">85 max before submit</strong>
+        <span style="color:var(--border2);font-size:16px">→</span>
+        <span style="font-size:13px;color:var(--ink2)">form_submit = <strong style="color:var(--navy)">100</strong></span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 04. SUCCESS METRICS -->
+    </section>
+    <section class="section" id="s04">
+      <div class="sec-header">
+        <span class="sec-num">04</span>
+        <div>
+          <div class="sec-title">Success Metrics</div>
+          <div class="sec-sub">Three milestones - System ready · Paid live · Baseline data collected.</div>
+        </div>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Milestone</th><th>KPI</th><th>Target</th><th>Timeline</th></tr></thead>
+        <tbody>
+          <tr class="tbl-group-hdr"><td colspan="4">System Ready</td></tr>
+          <tr><td class="kpi-note">System Ready</td><td class="kpi-name">Events live and firing</td><td class="kpi-target">13 / 13</td><td class="kpi-note">End May</td></tr>
+          <tr><td class="kpi-note">System Ready</td><td class="kpi-name">Intent score assigned to users</td><td class="kpi-target">Every intent event scored · no gaps · 7-day window</td><td class="kpi-note">End May</td></tr>
+          <tr><td class="kpi-note">System Ready</td><td class="kpi-name">LinkedIn audience segments built</td><td class="kpi-target">4 segments · Warm · Hot · High Intention · Whitepaper</td><td class="kpi-note">Jun</td></tr>
+          <tr><td class="kpi-note">System Ready</td><td class="kpi-name">Audience size per segment</td><td class="kpi-target">≥ 300 members</td><td class="kpi-note">Before Jul W1</td></tr>
+          <tr class="tbl-group-hdr"><td colspan="4">Paid Live</td></tr>
+          <tr><td class="kpi-note">Paid Live</td><td class="kpi-name">LinkedIn Paid activated</td><td class="kpi-target">Retarget only · no cold ads</td><td class="kpi-note">Jul</td></tr>
+          <tr><td class="kpi-note">Paid Live</td><td class="kpi-name">Whitepaper email list uploaded</td><td class="kpi-target">Exact match · 14d delay</td><td class="kpi-note">Jun</td></tr>
+          <tr class="tbl-group-hdr"><td colspan="4">Baseline Data</td></tr>
+          <tr><td class="kpi-note">Baseline Data</td><td class="kpi-name">Retarget performance by segment</td><td class="kpi-target">CTR · CVR · CPL measured</td><td class="kpi-note">31 Aug</td></tr>
+        </tbody>
+      </table>
+    
+
+    <div class="divider"></div>
+
+    <!-- 05. ROADMAP -->
+    </section>
+    <section class="section" id="s05">
+      <div class="sec-header">
+        <span class="sec-num">05</span>
+        <div>
+          <div class="sec-title">Roadmap &amp; Gates</div>
+          <div class="sec-sub">Four phases. Each has a gate - we do not move forward until the previous phase is confirmed.</div>
+        </div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-hdr"><span class="phase-pill p1">Phase 0</span><span class="phase-title">Foundation · Infrastructure &amp; Tracking Setup</span><span class="phase-weeks">Apr - May W3</span></div>
+        <div class="phase-body">Insight Tag · GTM · Dev events implemented · LinkedIn CM Custom Events · Scoring system operational</div>
+        <div class="phase-gate"><span class="gate-label">Gate 1</span><span class="gate-text">All events firing. Audiences can build. Campaign content does not go live until this gate is confirmed.</span><span class="gate-when" style="margin-left:auto">May W3 ✅</span></div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-hdr"><span class="phase-pill p1">Phase 1</span><span class="phase-title">Launch · Campaign Live + Audience Build Begins</span><span class="phase-weeks">May - Jun</span></div>
+        <div class="phase-body">3 Campaign LPs live · Whitepaper distributed · 4 LinkedIn audiences building</div>
+        <div class="phase-gate"><span class="gate-label">Gate 2</span><span class="gate-text">≥300 members in each of the 4 priority LinkedIn audience segments.</span><span class="gate-when" style="margin-left:auto">Before Jul W1</span></div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-hdr"><span class="phase-pill p2">Phase 2</span><span class="phase-title">Paid Activation · LinkedIn Ads Live</span><span class="phase-weeks">Jul</span></div>
+        <div class="phase-body">LinkedIn Paid activated · LP01/02/03 URL Audience · Whitepaper Downloaders · Blog CTA Hot · LI Engagement (Open Lead Gen Form not submitted)</div>
+        <div class="phase-gate"><span class="gate-label">Gate 3</span><span class="gate-text">CTR, CPL, and form CVR measured by segment. Data available to optimize.</span><span class="gate-when" style="margin-left:auto">End Jul</span></div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-hdr"><span class="phase-pill p3">Phase 3</span><span class="phase-title">Scale · Expand to Generic Funnel Audiences</span><span class="phase-weeks">Aug</span></div>
+        <div class="phase-body">Expand LinkedIn Paid to Generic Funnel audiences (Warm · Hot · High Intention) · Optimize retarget by segment · Research Microsoft Ads and other channels</div>
+        <div class="phase-gate"><span class="gate-label">Output</span><span class="gate-text">Q3 channel expansion recommendation - backed by retarget performance data from Jul-Aug.</span><span class="gate-when" style="margin-left:auto">31 Aug</span></div>
+      </div>
+    
+
+    <div class="divider"></div>
+
+    <!-- 06. RISKS -->
+    </section>
+    <section class="section" id="s06">
+      <div class="sec-header">
+        <span class="sec-num">06</span>
+        <div>
+          <div class="sec-title">Risk &amp; Mitigation</div>
+          <div class="sec-sub">Three managed risks - each with a mitigation trigger.</div>
+        </div>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Risk</th><th style="width:90px">Impact</th><th>Mitigation</th><th style="width:110px">Owner</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="risk-name">LinkedIn audience too small at launch<span class="risk-sub">Under 300 members - ads cannot activate in Jul</span></span></td>
+            <td><span class="impact-med">Medium</span></td>
+            <td class="risk-mit">Start with 4 priority segments. Merge Warm segments if needed. Monitor 2-3 weeks before assessing. Whitepaper email list provides seed audience independent of traffic.</td>
+            <td class="risk-owner">Digital Marketing</td>
+          </tr>
+          <tr>
+            <td><span class="risk-name">Organic traffic too low to build audiences<span class="risk-sub">Insufficient signal volume in May-Jun without Paid support · In progress</span></span></td>
+            <td><span class="impact-med">Medium</span></td>
+            <td class="risk-mit">AI Native Campaign LPs target specific ICP - even low traffic is high-signal. Whitepaper email list provides seed audience independent of website traffic volume.</td>
+            <td class="risk-owner">Digital Marketing</td>
+          </tr>
+          <tr>
+            <td><span class="risk-name">Scoring model inaccurate in first 30 days<span class="risk-sub">Thresholds too high or low - users misclassified into wrong intent group</span></span></td>
+            <td><span class="impact-med">Medium</span></td>
+            <td class="risk-mit">Monthly review with Sales feedback to recalibrate thresholds. First 30 leads reviewed manually before scoring is fully trusted for automation.</td>
+            <td class="risk-owner">Digital + Sales</td>
+          </tr>
+        </tbody>
+      </table>
+    
+
+    </section>
+    </main>
+  </div>
+</div>
+
+
+
+
+<!-- ══════════════════════════════
+     TAB 2 - USER INTENT FUNNEL
+══════════════════════════════ -->
+<div class="tab-panel" id="panel-funnel">
+  <div style="padding:32px 40px 80px;margin:0 auto">
+
+    <div class="sec-header">
+      <span class="sec-num">TAB 2</span>
+      <div>
+        <div class="sec-title">User Intent Funnel</div>
+        <div class="sec-sub">Stage-by-stage event tracking - Anonymous → Content Engaged → High Intent → Converted</div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <strong>Purpose:</strong>
+      Map every user behavior to a trackable event - so each action feeds Intent Scoring (Tab 3). Events are split into 4 signal types: Behavioral (GA4 + Scoring only), Page-level URL (LinkedIn URL Audience), Warm Custom Event (LinkedIn Insight Tag), Buying Custom Event (LinkedIn Conversion).
+    </div>
+
+    <div class="tbl-wrap" id="funnel-wrap">
+      <div class="tbl-toolbar">
+        <div class="tbl-toolbar-left">
+          <span class="tbl-toolbar-title">15 Events</span>
+          <div class="filter-bar">
+            <button class="flt-btn active" onclick="filterFunnel('all',this)">All</button>
+            <button class="flt-btn" onclick="filterFunnel('anon',this)">Anonymous</button>
+            <button class="flt-btn" onclick="filterFunnel('content',this)">Content Engaged</button>
+            <button class="flt-btn" onclick="filterFunnel('hi',this)">High Intent</button>
+            <button class="flt-btn" onclick="filterFunnel('conv',this)">Converted</button>
+          </div>
+        </div>
+        <button class="toggle-detail" id="toggle-gtm" onclick="toggleGTM()">＋ GTM Detail</button>
+      </div>
+      <div class="tbl-scroll">
+        <table class="tbl" id="funnel-tbl">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Step</th>
+              <th>Event</th>
+              <th>Input<br>Captured</th>
+              <th>Data<br>Stored</th>
+              <th class="col-gtm">Interaction</th>
+              <th class="col-gtm">GTM Trigger</th>
+              <th>Page / URL Rule</th>
+              <th>Campaign Tag</th>
+              <th>LinkedIn Tag</th>
+              <th>Audience</th>
+              <th>Ads Type</th>
+              <th>Link To</th>
+              <th>Objective</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ─── GROUP: Generic Funnel ─── -->
+            <tr class="tbl-group-hdr" data-stage="all">
+              <td colspan="14">⚙️ Generic Funnel - all traffic, all campaigns</td>
+            </tr>
+
+            <!-- SIGNAL TYPE: BEHAVIORAL -->
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🟢 Behavioral Signals - GA4 + Intent Scoring only · LinkedIn cannot track scroll/time behavior</td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">Scroll Blog</td>
+              <td><span class="td-mono">scroll_70</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Scroll ≥70%</td>
+              <td class="col-gtm td-note">Scroll Depth</td>
+              <td class="td-note">Any /blog/*</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--ink3)">GA4 + Scoring only</td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--teal)">Blog</td>
+              <td><span class="obj-engage">Engagement</span></td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">Time on Page</td>
+              <td><span class="td-mono">time_on_page_60s</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">≥60 seconds</td>
+              <td class="col-gtm td-note">Timer</td>
+              <td class="td-note">Any page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--ink3)">GA4 + Scoring only</td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--teal)">Blog</td>
+              <td><span class="obj-engage">Engagement</span></td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">Return Visit</td>
+              <td><span class="td-mono">return_visit</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">≥2 sessions</td>
+              <td class="col-gtm td-note">Custom</td>
+              <td class="td-note">Any page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--ink3)">GA4 + Scoring only</td>
+              <td style="font-size:11px;color:var(--ink3)">-</td>
+              <td style="font-size:12px;color:var(--teal)">Any page</td>
+              <td><span class="obj-traffic">Traffic</span></td>
+            </tr>
+
+            <!-- 🟠 WARM CUSTOM EVENT -->
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🟠 Warm Custom Event - LinkedIn Insight Tag · Sponsored Content · view_service_page fires on LP pages too for scoring</td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">View Case Study</td>
+              <td><span class="td-mono">view_case_study</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">/case-study/*</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-ANON-case</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Website + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">Case Study</td>
+              <td><span class="obj-traffic">Traffic</span></td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">View Service Page</td>
+              <td><span class="td-mono">view_service_page</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">/software-development · /qa-testing · [other service pages] · <span style="color:var(--gold)">incl. /greenfield · /brownfield · /legacy-modernisation</span></td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-ANON-service</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Website + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">Service</td>
+              <td><span class="obj-traffic">Traffic</span></td>
+            </tr>
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🔴 Buying Signals - LinkedIn Custom Event · conversion optimization</td>
+            </tr>
+            <tr data-stage="anon">
+              <td><span class="stage-anon">Anonymous</span></td>
+              <td class="td-bold">Contact View</td>
+              <td><span class="td-mono">contact_view</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">/contact</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-ANON-contact</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Website + ICP</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">LinkedIn Lead Gen Form</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Start Form</td>
+              <td><span class="td-mono">step1_start</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Click CTA</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">Any form page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-HI-step1</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Website + ICP</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">LinkedIn Lead Gen Form</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Drop Step 1</td>
+              <td><span class="td-mono-red">form_drop_step1</span></td>
+              <td style="text-align:center">✅</td>
+              <td style="text-align:center">✅</td>
+              <td class="col-gtm td-note">No Step 2 after timeout</td>
+              <td class="col-gtm td-note">Timer + Condition</td>
+              <td class="td-note">Any form page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-HI-drop1</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Email captured</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">LinkedIn Lead Gen Form</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Step 2 View</td>
+              <td><span class="td-mono">step2_view</span></td>
+              <td style="text-align:center">✅</td>
+              <td style="text-align:center">✅</td>
+              <td class="col-gtm td-note">Click Next</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">Any form page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-HI-step2_view</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Email captured</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">LinkedIn Lead Gen Form</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Step 2 Engaged</td>
+              <td><span class="td-mono">step2_engaged</span></td>
+              <td style="text-align:center">✅</td>
+              <td style="text-align:center">✅</td>
+              <td class="col-gtm td-note">Input / ≥10s</td>
+              <td class="col-gtm td-note">Input + Timer</td>
+              <td class="td-note">Any form page</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td><span class="td-mono">LI-HI-step2_engaged</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Email captured</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">LinkedIn Lead Gen Form · Priority</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+            <tr data-stage="conv">
+              <td><span class="stage-conv">Converted</span></td>
+              <td class="td-bold">Form Submit</td>
+              <td><span class="td-mono">form_submit</span></td>
+              <td style="text-align:center">✅</td>
+              <td style="text-align:center">✅</td>
+              <td class="col-gtm td-note">Submit success</td>
+              <td class="col-gtm td-note">Page View</td>
+              <td class="td-note">/thank-you</td>
+              <td><span class="ctag-generic">generic</span></td>
+              <td style="font-size:11px;color:var(--ink3)">- Internal system</td>
+              <td style="font-size:12px;color:var(--ink3)">Exclude</td>
+              <td><span class="ads-excl">Exclude</span></td>
+              <td style="font-size:12px;color:var(--green);font-weight:600">Sales Pipeline</td>
+              <td><span class="obj-measure">Measure</span></td>
+            </tr>
+
+            <!-- AI Native Campaign group header -->
+            <tr class="tbl-group-hdr tbl-group-campaign" data-stage="all">
+              <td colspan="14">AI Native Campaign - spec-driven content layer · May–Aug 2026 · LP01/02/03 scored via view_service_page · LinkedIn retarget via URL Audience in CM</td>
+            </tr>
+
+            <!-- 🔵 URL AUDIENCE: LP retarget -->
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🔵 URL Audience - LinkedIn auto-tracks via Insight Tag · no GTM tag needed · retarget with Sponsored Content per LP</td>
+            </tr>
+            <tr data-stage="content">
+              <td><span class="stage-content">Content Engaged</span></td>
+              <td class="td-bold">LP01 Visitors</td>
+              <td><span class="td-mono" style="color:var(--gold)">view_service_page</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">URL Audience · no GTM tag</td>
+              <td class="td-note">/greenfield</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td style="font-size:11px;color:var(--ink3)">URL Audience · LI auto-tracks</td>
+              <td style="font-size:12px;color:var(--ink3)">LP01 Visitors + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ Article 1 · Vibe Coding</td>
+              <td><span class="obj-traffic">Traffic</span></td>
+            </tr>
+            <tr data-stage="content">
+              <td><span class="stage-content">Content Engaged</span></td>
+              <td class="td-bold">LP02 Visitors</td>
+              <td><span class="td-mono" style="color:var(--gold)">view_service_page</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">URL Audience · no GTM tag</td>
+              <td class="td-note">/brownfield</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td style="font-size:11px;color:var(--ink3)">URL Audience · LI auto-tracks</td>
+              <td style="font-size:12px;color:var(--ink3)">LP02 Visitors + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ Article 3 · Brownfield</td>
+              <td><span class="obj-traffic">Traffic</span></td>
+            </tr>
+            <tr data-stage="content">
+              <td><span class="stage-content">Content Engaged</span></td>
+              <td class="td-bold">LP03 Visitors</td>
+              <td><span class="td-mono" style="color:var(--gold)">view_service_page</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Page view</td>
+              <td class="col-gtm td-note">URL Audience · no GTM tag</td>
+              <td class="td-note">/legacy-modernisation</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td style="font-size:11px;color:var(--ink3)">URL Audience · LI auto-tracks</td>
+              <td style="font-size:12px;color:var(--ink3)">LP03 Visitors + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ Whitepaper CTA</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+
+            <!-- 🟢 BEHAVIORAL + WARM/HOT: blog -->
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🟢 blog_read_ai_native = Warm (Scroll ≥70% OR Time ≥60s) · blog_read_ai_native_cta = Hot (CTA click → LP)</td>
+            </tr>
+            <tr data-stage="content">
+              <td><span class="stage-content">Content Engaged</span></td>
+              <td class="td-bold">Read AI Native Blog</td>
+              <td><span class="td-mono">blog_read_ai_native</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Scroll ≥70% OR Time ≥60s</td>
+              <td class="col-gtm td-note">Scroll Depth OR Timer</td>
+              <td class="td-note">/blog/ai-native* · /blog/spec-driven* · /blog/vibe-coding*</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td><span class="td-mono">LI-AIN-blog</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Warm · Blog Readers + ICP</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ LP01 / LP02 / LP03</td>
+              <td><span class="obj-engage">Engagement</span></td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Blog CTA Click</td>
+              <td><span class="td-mono">blog_read_ai_native_cta</span></td>
+              <td style="text-align:center">❌</td>
+              <td style="text-align:center">❌</td>
+              <td class="col-gtm td-note">Click CTA on AI Native blog</td>
+              <td class="col-gtm td-note">Custom Event</td>
+              <td class="td-note">/blog/ai-native* · /blog/spec-driven* · /blog/vibe-coding*</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td><span class="td-mono">LI-AIN-blog-cta</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Hot · Blog CTA Clickers + ICP</td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ LP01 / LP02 / LP03</td>
+              <td><span class="obj-conv">Conversion</span></td>
+            </tr>
+
+            <!-- Buying: whitepaper -->
+            <tr class="tbl-group-hdr tbl-group-hdr-l2" data-stage="all">
+              <td colspan="14" style="color:var(--ink3)!important;font-size:9px!important;padding:5px 14px!important;border-left:none!important">🔴 Buying Signal - LinkedIn Custom Event · conversion</td>
+            </tr>
+            <tr data-stage="hi">
+              <td><span class="stage-hi">High Intent</span></td>
+              <td class="td-bold">Whitepaper Download</td>
+              <td><span class="td-mono">whitepaper_download</span></td>
+              <td style="text-align:center">✅</td>
+              <td style="text-align:center">✅</td>
+              <td class="col-gtm td-note">Form submit (gated PDF)</td>
+              <td class="col-gtm td-note">Form Submit · Thank You</td>
+              <td class="td-note">/legacy-modernisation/thank-you</td>
+              <td><span class="ctag-campaign">ai_native</span></td>
+              <td><span class="td-mono">LI-AIN-wp-dl</span></td>
+              <td style="font-size:12px;color:var(--ink3)">Whitepaper Downloaders (email list)</td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:12px;color:var(--teal)">→ Spec Extraction / Diagnostic Slice · 14d delay</td>
+              <td><span class="obj-measure">Measure + Retarget</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend-row">
+        <span style="font-weight:700;color:var(--ink2);font-size:11px">Signal Type:</span>
+        <span class="leg">🟢 Behavioral - GA4 + Scoring only</span>
+        <span class="leg">🔵 Page-level - LinkedIn URL Audience</span>
+        <span class="leg">🟠 Warm Event - LinkedIn Insight Tag · Sponsored Content</span>
+        <span class="leg">🔴 Buying - LinkedIn Custom Event · Conversion</span>
+        <span style="width:1px;background:var(--border2);height:14px;display:inline-block;margin:0 4px"></span>
+        <span style="font-weight:700;color:var(--ink2);font-size:11px">Data Stored:</span>
+        <span class="leg"><span style="font-size:13px">✅</span> Saved</span>
+        <span class="leg"><span style="font-size:13px;color:var(--gold)">⚠️</span> Partial</span>
+        <span class="leg"><span style="font-size:13px">❌</span> Not captured</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 3 - INTENT SCORING
+══════════════════════════════ -->
+<div class="tab-panel" id="panel-scoring">
+  <div style="padding:32px 40px 80px;margin:0 auto">
+
+    <div class="sec-header">
+      <span class="sec-num">TAB 3</span>
+      <div>
+        <div class="sec-title">Intent Scoring</div>
+        <div class="sec-sub">7-day rolling window · score accumulates per user · resets on inactivity</div>
+      </div>
+    </div>
+
+    <div class="info-note">
+      <strong>Scoring Logic:</strong>
+      Events grouped into 3 categories. Content Read and Page Visit accumulate up to category max. Lead Intent takes the highest score in the group - not cumulative. Total max = 85 before form_submit (100 = converted).
+    </div>
+
+    <div class="tbl-wrap">
+      <div class="tbl-toolbar">
+        <div class="tbl-toolbar-left">
+          <span class="tbl-toolbar-title">13 Events · Max Score 85 → 100</span>
+          <div class="filter-bar">
+            <button class="flt-btn active" onclick="filterScoring('all',this)">All</button>
+            <button class="flt-btn" onclick="filterScoring('Anonymous',this)">Anonymous</button>
+            <button class="flt-btn" onclick="filterScoring('High Intent',this)">High Intent</button>
+            <button class="flt-btn" onclick="filterScoring('Converted',this)">Converted</button>
+          </div>
+        </div>
+      </div>
+      <div class="tbl-scroll">
+        <table class="tbl" id="scoring-tbl">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Event</th>
+              <th>Score</th>
+              <th>Category Max</th>
+              <th>Rule</th>
+              <th>Push to System</th>
+              <th>Segment</th>
+              <th>Ads Action</th>
+              <th>System Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- CONTENT READ -->
+            <tr class="tbl-group-hdr" data-stage="Anonymous">
+              <td colspan="9">📖 Content Read - accumulate · max 10</td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Content Read</td>
+              <td><span class="td-mono">scroll_70</span></td>
+              <td><span class="score-chip score-low">+5</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 10</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-cold">Cold</span></td>
+              <td><span class="sys-none">-</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Content Read</td>
+              <td><span class="td-mono">time_on_page_60s</span></td>
+              <td><span class="score-chip score-low">+5</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 10</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-cold">Cold</span></td>
+              <td><span class="sys-none">-</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Content Read</td>
+              <td><span class="td-mono">blog_read_ai_native</span></td>
+              <td><span class="score-chip score-low">+5</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 10</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-warm">Warm</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td style="font-size:11px;color:var(--ink3);font-style:italic">AI Native blogs · Warm audience</td>
+            </tr>
+
+            <!-- PAGE VISIT -->
+            <tr class="tbl-group-hdr" data-stage="Anonymous">
+              <td colspan="9">🔵 Page Visit - accumulate · max 15</td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Page Visit</td>
+              <td><span class="td-mono">view_case_study</span></td>
+              <td><span class="score-chip score-low">+10</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 15</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-warm">Warm</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Page Visit</td>
+              <td><span class="td-mono">view_service_page</span></td>
+              <td><span class="score-chip score-low">+10</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 15</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-warm">Warm</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="Anonymous">
+              <td style="font-size:11px;color:var(--ink3)">Page Visit</td>
+              <td><span class="td-mono">return_visit</span></td>
+              <td><span class="score-chip score-low">+10</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 15</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-warm">Warm</span></td>
+              <td><span class="sys-none">-</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Page Visit</td>
+              <td><span class="td-mono">blog_read_ai_native_cta</span></td>
+              <td><span class="score-chip score-low">+15</span></td>
+              <td><span style="font-size:12px;color:var(--ink3)">Max 15</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Accumulate</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td style="font-size:11px;color:var(--ink3);font-style:italic">Blog CTA click → LP</td>
+            </tr>
+
+            <!-- LEAD INTENT -->
+            <tr class="tbl-group-hdr" data-stage="High Intent">
+              <td colspan="9">🔴 Lead Intent - highest score only · max 60</td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">contact_view</span></td>
+              <td><span class="score-chip score-low">+15</span></td>
+              <td rowspan="6" style="font-size:12px;color:var(--ink3);vertical-align:middle;text-align:center">Max 60<br><span style="font-size:10px;font-style:italic">highest only</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">step1_start</span></td>
+              <td><span class="score-chip score-med">+30</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-no">❌ No</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="sys-none">-</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">form_drop_step1</span></td>
+              <td><span class="score-chip score-med">+35</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-yes">✅ Yes</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="sys-action">Add to Retarget Audience · LinkedIn Lead Gen Form</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">whitepaper_download</span></td>
+              <td><span class="score-chip score-high">+40</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-yes">✅ Yes</span></td>
+              <td><span class="seg-hi">High Intent</span></td>
+              <td><span class="ads-sc">Sponsored Content · 14d delay</span></td>
+              <td><span class="sys-action">Add to Retarget Audience · 14d delay → Spec Extraction / Diagnostic Slice</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">step2_view</span></td>
+              <td><span class="score-chip score-vhigh">+50</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-yes">✅ Yes</span></td>
+              <td><span class="seg-hi">High Intent</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="sys-action">Add to Retarget Audience · LinkedIn Lead Gen Form</span></td>
+            </tr>
+            <tr data-stage="High Intent">
+              <td style="font-size:11px;color:var(--ink3)">Lead Intent</td>
+              <td><span class="td-mono">step2_engaged</span></td>
+              <td><span class="score-chip score-vhigh">+60</span></td>
+              <td style="font-size:11px;color:var(--ink3)">Highest in group</td>
+              <td><span class="push-yes">✅ Yes</span></td>
+              <td><span class="seg-hi">High Intent</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="sys-action">Add to Priority Retarget Audience · LinkedIn Lead Gen Form</span></td>
+            </tr>
+
+            <!-- CONVERTED -->
+            <tr class="tbl-group-hdr" data-stage="Converted">
+              <td colspan="9">✅ Converted - score reset · mark as lead</td>
+            </tr>
+            <tr data-stage="Converted">
+              <td style="font-size:11px;color:var(--ink3)">Converted</td>
+              <td><span class="td-mono">form_submit</span></td>
+              <td><span class="score-chip score-max">100</span></td>
+              <td style="font-size:12px;color:var(--ink3)">-</td>
+              <td style="font-size:11px;color:var(--ink3)">Single event</td>
+              <td><span class="push-yes">✅ Yes</span></td>
+              <td><span class="seg-lead">Lead</span></td>
+              <td><span class="ads-excl">Exclude</span></td>
+              <td><span class="sys-crm">New Lead → Analysis → Qualified → Sales</span></td>
+            </tr>
+
+            <!-- AI NATIVE -->
+          </tbody>
+        </table>
+      </div>
+      <div class="legend-row">
+        <span style="font-weight:700;color:var(--ink2);font-size:11px">Total max:</span>
+        <span class="leg">Content Read <span class="score-chip score-low" style="font-size:10px;height:18px;min-width:24px">10</span></span>
+        <span class="leg">+ Page Visit <span class="score-chip score-low" style="font-size:10px;height:18px;min-width:24px">15</span></span>
+        <span class="leg">+ Lead Intent <span class="score-chip score-vhigh" style="font-size:10px;height:18px;min-width:24px">60</span></span>
+        <span class="leg">= <span class="score-chip score-high" style="font-size:10px;height:18px;min-width:24px">85</span> before submit</span>
+        <span class="leg">→ form_submit <span class="score-chip score-max" style="font-size:10px;height:18px;min-width:24px">100</span></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 4 - LINKEDIN AUDIENCE SEGMENT
+══════════════════════════════ -->
+<div class="tab-panel" id="panel-linkedin">
+  <div style="padding:32px 40px 80px;margin:0 auto">
+
+    <div class="sec-header">
+      <span class="sec-num">TAB 4</span>
+      <div>
+        <div class="sec-title">LinkedIn Audience Segment</div>
+        <div class="sec-sub">LinkedIn CM audience setup - Website Custom Event · URL Audience · Email List · LI Engagement</div>
+      </div>
+    </div>
+
+    <!-- ICP DEFINITION -->
+    <div class="info-note">
+      <strong>ICP Filter:</strong>
+      All anonymous audiences require ICP overlay in LinkedIn CM. System-synced audiences (step2_view, step2_engaged, whitepaper email list) have real identity data - no ICP filter needed.
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+        <div style="padding:9px 14px;background:var(--bg3);border-bottom:1px solid var(--border);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)">ICP Filter - Generic Campaigns</div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Job Title</div>
+            <div style="font-size:12px;color:var(--ink)">CTO · VP Engineering · CEO · Head of Product</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Industry</div>
+            <div style="font-size:12px;color:var(--ink)">
+              <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--teal3);color:var(--teal);margin-right:4px">Tier 1</span>Fintech · Health / Safety Inspection · Edutech<br>
+              <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--bg3);color:var(--ink3);margin-right:4px;margin-top:4px;display:inline-block">Tier 2</span>B2B SaaS · Platforms · Marketplaces
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Team Size</div>
+            <div style="font-size:12px;color:var(--ink)">Tech / Software unit 10–150 people</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Geography</div>
+            <div style="font-size:12px;color:var(--ink)">
+              <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--teal3);color:var(--teal);margin-right:4px">Tier 1</span>Australia · Nordics · Europe (Germany + broader EU)<br>
+              <span style="font-size:10px;font-weight:700;padding:1px 6px;border-radius:3px;background:var(--bg3);color:var(--ink3);margin-right:4px;margin-top:4px;display:inline-block">Tier 2</span>New Zealand
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(245,166,35,.05);border:1px solid rgba(245,166,35,.2);border-radius:var(--r);overflow:hidden">
+        <div style="padding:9px 14px;background:rgba(245,166,35,.08);border-bottom:1px solid rgba(245,166,35,.15);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)">AI Native Campaign - ICP Filter</div>
+        <div style="padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Job Title</div>
+            <div style="font-size:12px;color:var(--ink)">CTO · VP Engineering · CEO</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Industry</div>
+            <div style="font-size:12px;color:var(--ink)">Fintech · Health / Safety Inspection · Edutech</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Team Size</div>
+            <div style="font-size:12px;color:var(--ink)">Tech / Software unit 10–150 people</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Geography</div>
+            <div style="font-size:12px;color:var(--ink)">Australia · Nordics</div>
+          </div>
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono);margin-bottom:4px">Frequency Cap</div>
+            <div style="font-size:12px;color:var(--gold);font-weight:600">Max 3 impressions / week / person</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AUDIENCE TABLE -->
+    <div class="tbl-wrap">
+      <div class="tbl-toolbar">
+        <div class="tbl-toolbar-left">
+          <span class="tbl-toolbar-title">Audience Segments</span>
+          <div class="filter-bar">
+            <button class="flt-btn active" onclick="filterLI('all',this)">All</button>
+            <button class="flt-btn" onclick="filterLI('website',this)">Website Event</button>
+            <button class="flt-btn" onclick="filterLI('url',this)">URL Audience</button>
+            <button class="flt-btn" onclick="filterLI('email',this)">Email List</button>
+            <button class="flt-btn" onclick="filterLI('engagement',this)">LI Engagement</button>
+          </div>
+        </div>
+      </div>
+      <div class="tbl-scroll">
+        <table class="tbl" id="li-tbl">
+          <thead>
+            <tr>
+              <th>Source</th>
+              <th>Segment</th>
+              <th>Rule (Audience Definition)</th>
+              <th>+ ICP Filter</th>
+              <th>Ad Type</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- WEBSITE CUSTOM EVENT -->
+            <tr class="tbl-group-hdr" data-type="website">
+              <td colspan="6">⚡ Website Custom Event - Insight Tag fires when user performs action</td>
+            </tr>
+            <tr data-type="website">
+              <td><span class="src-track">Custom Event</span></td>
+              <td><span class="seg-warm">Warm · Blog Readers</span></td>
+              <td style="font-size:12px;color:var(--ink2)"><code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">blog_read_ai_native</code> - Scroll ≥70% OR Time ≥60s on AI Native blog</td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-consid purp">→ LP01 / LP02 / LP03</span></td>
+            </tr>
+            <tr data-type="website">
+              <td><span class="src-track">Custom Event</span></td>
+              <td><span class="seg-hot">Hot · Blog CTA Clickers</span></td>
+              <td style="font-size:12px;color:var(--ink2)"><code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">blog_read_ai_native_cta</code> - Click CTA on AI Native blog after scroll/time engagement</td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="purp-push purp">→ LP01 / LP02 / LP03</span></td>
+            </tr>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-consid purp">Consideration</span></td>
+            </tr>
+            <tr data-type="website">
+              <td><span class="src-track">Custom Event</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td style="font-size:12px;color:var(--ink2)">
+                <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">contact_view</code> OR
+                <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">step1_start</code> OR
+                <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">form_drop_step1</code><br>
+                <span style="font-size:11px;color:var(--ink3);font-style:italic">LinkedIn pre-fills name/email/company from profile - lower friction than returning to website</span>
+              </td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="purp-push purp">LinkedIn Lead Gen Form</span></td>
+            </tr>
+            <tr data-type="website">
+              <td><span class="src-ts">Custom Event + System</span></td>
+              <td><span class="seg-hi">High Intent · Step 2 View</span></td>
+              <td style="font-size:12px;color:var(--ink2)"><code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">step2_view</code> - email captured · synced to system</td>
+              <td><span class="icp-no">❌ Not needed</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="purp-retarget purp">LinkedIn Lead Gen Form</span></td>
+            </tr>
+            <tr data-type="website">
+              <td><span class="src-ts">Custom Event + System</span></td>
+              <td><span class="seg-hi">High Intent · Engaged</span></td>
+              <td style="font-size:12px;color:var(--ink2)"><code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">step2_engaged</code> - email captured · synced to system</td>
+              <td><span class="icp-no">❌ Not needed</span></td>
+              <td><span class="ads-conv">Lead Gen Form</span></td>
+              <td><span class="purp-close purp">LinkedIn Lead Gen Form · Priority</span></td>
+            </tr>
+
+            <!-- URL AUDIENCE -->
+            <tr class="tbl-group-hdr" data-type="url">
+              <td colspan="6">🔵 URL Audience - AI Native Campaign · LinkedIn auto-tracks via Insight Tag · no GTM tag needed · setup URL rule in LinkedIn CM</td>
+            </tr>
+            <tr data-type="url">
+              <td><span class="src-li">URL · AI Native</span></td>
+              <td><span class="seg-warm">LP01 · /greenfield</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Visited <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">/greenfield</code> · scored via <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">view_service_page</code></td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-consid purp">→ Article 1 · Vibe Coding</span></td>
+            </tr>
+            <tr data-type="url">
+              <td><span class="src-li">URL · AI Native</span></td>
+              <td><span class="seg-warm">LP02 · /brownfield</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Visited <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">/brownfield</code> · scored via <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">view_service_page</code></td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-consid purp">→ Article 3 · Brownfield</span></td>
+            </tr>
+            <tr data-type="url">
+              <td><span class="src-li">URL · AI Native</span></td>
+              <td><span class="seg-warm">LP03 · /legacy-modernisation</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Visited <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">/legacy-modernisation</code> · scored via <code style="font-size:11px;background:var(--bg2);padding:1px 5px;border-radius:3px">view_service_page</code></td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-push purp">→ Whitepaper CTA</span></td>
+            </tr>
+
+            <!-- EMAIL LIST -->
+            <tr class="tbl-group-hdr" data-type="email">
+              <td colspan="6">📧 Email List Upload - Identity confirmed · AI Native Campaign</td>
+            </tr>
+            <tr data-type="email">
+              <td><span class="src-system">Email Upload</span></td>
+              <td><span class="seg-hi">Whitepaper Downloaders</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Email list from whitepaper form submission - upload to LinkedIn CM</td>
+              <td><span class="icp-no">❌ Not needed</span></td>
+              <td><span class="ads-sc">Sponsored Content · 14d delay</span></td>
+              <td><span class="purp-close purp">→ Spec Extraction / Diagnostic Slice</span></td>
+            </tr>
+
+            <!-- LI ENGAGEMENT -->
+            <tr class="tbl-group-hdr" data-type="engagement">
+              <td colspan="6">💼 LinkedIn Engagement - In-platform behavior · AI Native Campaign</td>
+            </tr>
+            <tr data-type="engagement">
+              <td><span class="src-li">LI Engagement</span></td>
+              <td><span class="seg-warm">Warm</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Video ≥50% OR Post engagement (like, comment, share)</td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-sc">Sponsored Content</span></td>
+              <td><span class="purp-warmup purp">Warm up · boost organic</span></td>
+            </tr>
+            <tr data-type="engagement">
+              <td><span class="src-li">LI Engagement</span></td>
+              <td><span class="seg-hot">Hot</span></td>
+              <td style="font-size:12px;color:var(--ink2)">Ad click OR Open form (not submitted)</td>
+              <td><span class="icp-yes">✔️ Required</span></td>
+              <td><span class="ads-conv">Conversion Ads</span></td>
+              <td><span class="purp-push purp">Push to LP / contact</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Intent Scoring Plan · GTM 2026</span>
+  <span>Private · Digital Marketing</span>
+</div>
+
+<script>
+/* OVERVIEW SIDEBAR NAV */
+function ovSetActive(el) {
+  document.querySelectorAll('.ov-sidebar .nav-item').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* TAB */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* GTM DETAIL TOGGLE - Tab 2 */
+var gtmOn = false;
+function toggleGTM() {
+  gtmOn = !gtmOn;
+  var tbl = document.getElementById('funnel-tbl');
+  var btn = document.getElementById('toggle-gtm');
+  if (gtmOn) {
+    tbl.classList.add('show-gtm');
+    btn.classList.add('on');
+    btn.textContent = '− GTM Detail';
+  } else {
+    tbl.classList.remove('show-gtm');
+    btn.classList.remove('on');
+    btn.textContent = '＋ GTM Detail';
+  }
+}
+
+/* FILTER: FUNNEL */
+function filterFunnel(stage, btn) {
+  document.querySelectorAll('#panel-funnel .flt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  var rows = Array.from(document.querySelectorAll('#funnel-tbl tbody tr'));
+  // First pass: show/hide data rows
+  rows.forEach(tr => {
+    if (!tr.classList.contains('tbl-group-hdr') && !tr.classList.contains('tbl-repeat-hdr')) {
+      tr.style.display = (stage === 'all' || tr.dataset.stage === stage) ? '' : 'none';
+    }
+  });
+  // Second pass: hide group headers + repeat headers if no visible rows follow
+  rows.forEach((tr, i) => {
+    if (tr.classList.contains('tbl-group-hdr') || tr.classList.contains('tbl-repeat-hdr')) {
+      var hasVisible = false;
+      for (var j = i + 1; j < rows.length; j++) {
+        if (rows[j].classList.contains('tbl-group-hdr')) break;
+        if (rows[j].style.display !== 'none') { hasVisible = true; break; }
+      }
+      tr.style.display = hasVisible ? '' : 'none';
+    }
+  });
+}
+
+/* FILTER: SCORING */
+function filterScoring(stage, btn) {
+  document.querySelectorAll('#panel-scoring .flt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  var rows = Array.from(document.querySelectorAll('#scoring-tbl tbody tr'));
+  rows.forEach(tr => {
+    if (!tr.classList.contains('tbl-group-hdr')) {
+      tr.style.display = (stage === 'all' || tr.dataset.stage === stage) ? '' : 'none';
+    }
+  });
+  rows.forEach((tr, i) => {
+    if (tr.classList.contains('tbl-group-hdr')) {
+      var hasVisible = false;
+      for (var j = i + 1; j < rows.length; j++) {
+        if (rows[j].classList.contains('tbl-group-hdr')) break;
+        if (rows[j].style.display !== 'none') { hasVisible = true; break; }
+      }
+      tr.style.display = hasVisible ? '' : 'none';
+    }
+  });
+}
+
+/* FILTER: LINKEDIN - uses data-type keys without spaces */
+function filterLI(type, btn) {
+  document.querySelectorAll('#panel-linkedin .flt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  var rows = Array.from(document.querySelectorAll('#li-tbl tbody tr'));
+  rows.forEach(tr => {
+    if (!tr.classList.contains('tbl-group-hdr')) {
+      tr.style.display = (type === 'all' || tr.dataset.type === type) ? '' : 'none';
+    }
+  });
+  rows.forEach((tr, i) => {
+    if (tr.classList.contains('tbl-group-hdr')) {
+      var hasVisible = false;
+      for (var j = i + 1; j < rows.length; j++) {
+        if (rows[j].classList.contains('tbl-group-hdr')) break;
+        if (rows[j].style.display !== 'none') { hasVisible = true; break; }
+      }
+      tr.style.display = hasVisible ? '' : 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
